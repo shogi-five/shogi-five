@@ -17,4 +17,3 @@ cloneしたり、pushする際に必要。
 	- Tokens (classic)：大まかな設定ができる（今回はこっち）
 5. repoにチェック
 6. access tokenをメモ
-
