@@ -77,9 +77,7 @@ C : GameControler
 - void init()：盤面の初期化
 - void setView(Bord：盤面)： 盤面の表示
 - void setChooseableView()：Chooseable[]をViewにセット
-- Chooseable[] getChooseableList(Bord：盤面, Piece[]：自分の駒)：現在移動可能なリストを取得
-- void setChooseableList(Chooseable[])：Chooseable[]をセット
-- bool checkChooseableList(Chooseable)：ChooseableがChooseable[]にあるか判定
+- Chooseable[] getChooseableList()：選択された駒が移動可能なリストをゲット
 - int getChooseablePosition()：駒の移動先の位置を取得
 - Bord getNextBord(Bord：盤面, Piece：駒, int：位置)：次の盤面の生成
 - void checkVictory()：勝敗の判定
@@ -109,9 +107,17 @@ C : GameControler
 ### フィールド
 
 ### メソッド
-- Bord operator(Bord：盤面, Piece：駒, int：位置)：駒を移動させ、次の盤面を返す
-- Chooseable[] availablePiece(Bord：盤面, Piece[]：駒のリスト)：駒のリストがそれぞれ移動可能なChooseableのリストを返す
-- void piceMove(Bord：盤面, Piece：駒, int：移動先)：駒を移動先に移動させる
+- Status operator(Staus：状況, Piece：駒, int：位置)：駒を移動させ、次の盤面を返す
+- int[] availablePiece(Bord：盤面, Piece：駒)：駒が移動可能なリストを返す
+
+---
+# Status
+## 説明
+盤面、駒の所有を示し、その場面の状況を表す。
+
+## フィールド
+- Board board：盤面を表す
+- Player[] playerPiece：プレイヤーが所有する駒を表す
 
 ---
 
