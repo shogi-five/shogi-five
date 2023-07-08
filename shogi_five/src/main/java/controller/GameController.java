@@ -50,12 +50,12 @@ public class GameController {
     /*
      * 現在移動可能なリストを取得
      */
-    public getSelectionList(){}
+    public getChooseableList(){}
 
     /*
      * Playerが選択した駒の移動可能なリストをセット
      */
-    public setSelectionList(){}
+    public setChooseableList(){}
 
     /*
      * 次の盤面の生成

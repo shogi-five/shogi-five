@@ -9,4 +9,14 @@ public class Board {
      * コンストラクタ：初期化
      */
     public Board() {}
+
+    /*
+     * 駒を位置にセット
+     */
+    public void setPiece(Piece piece, int position){}
+
+    /*
+     * 位置にセットされている駒をゲット
+     */
+    public Piece getPiece(int position){}
 }
