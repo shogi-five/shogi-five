@@ -10,7 +10,6 @@ public abstract class Piece {
     private int pieceClass;//駒の種類
     private int position;//駒の現在地
     private boolean promote;//成りかどうか
-    private Selection[] availableMoves;//移動可能なリスト
 
     /*
     * コンストラクタ
@@ -19,9 +18,8 @@ public abstract class Piece {
         this.pieceClass = pieceClass;
         this.position = position;
         this.promote = false;
-        this.availableMoves = availableMoves;
     }
 
     //動きを定義する
-    //public abstract int[] move();
+    public abstract int[] move();
 }
