@@ -32,6 +32,8 @@ exit
 ```
 
 # 今後使うとき
+まずDocker Desktop on Windowsを立ち上げることでdocker daemonを起動する。
+その下記のコマンド。
 ```bash
 # イメージの確認
 docker images

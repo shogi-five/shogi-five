@@ -18,7 +18,7 @@ C : GameControler
 
 1. GameControlerが盤面を初期化
 2. GameControlerがOperatorに盤面と所有している駒達を渡す
-3. OperatorがSelectionリストを返す
+3. OperatorがChooseableリストを返す
 4. GameControlerがViewに盤面を渡す
 5. プレイヤーが駒を選択
 6. 移動可能な駒であればViewが駒をGameControlerに渡す、でなければ5に戻る
@@ -30,6 +30,20 @@ C : GameControler
 12. GameControlerがViewに次の盤面を渡す
 13. GameControlerがゲーム終了か判定する
 14. 指し手を交代し、2に戻る
+
+## 駒の所有権が移る場合
+1. プレイヤーが駒を選択
+2. Viewが選択された位置をGameControlerに渡す
+3. GameControlerが位置から駒を推定
+4. プレイヤーが所有している駒でなければ、元に戻る
+5. GameControlerがOperatorに盤面と駒と位置を渡す
+6. Operatorは駒が移動可能な位置のリスト(Chooseable)を返す
+7. GameControlerは移動可能なリストをViewに渡す
+8. プレイヤーが移動先を決定
+9. Viewが選択された位置をGameControlerに渡す
+10. GameControlerが盤面と駒と移動先、各プレイヤーの所有している駒のリストをOperator渡す
+11. Operatorは駒を動かし、盤面、駒のリストも更新し返す
+12. GameControlerがViewに渡す
 
 ---
 
@@ -43,7 +57,7 @@ C : GameControler
 - Operator operator：オペレータ
 
 ### メソッド
-- void run()：ゲーム開始
+- void main()：ゲーム開始
 
 ---
 
@@ -62,15 +76,13 @@ C : GameControler
 - void game()：ゲームのループ
 - void init()：盤面の初期化
 - void setView(Bord：盤面)： 盤面の表示
-- void setSelectionView()：Selection[]をViewにセット
-- Selection[] getSelectionList(Bord：盤面, Piece[]：自分の駒)：現在移動可能なリストを取得
-- void setSelectionList(Selection[])：Selection[]をPlayerにセット
-- bool checkSelectionList(Selection)：SelectionがSelection[]にあるか判定
-- int getSelectionPosition()：駒の移動先の位置を取得
+- void setChooseableView()：Chooseable[]をViewにセット
+- Chooseable[] getChooseableList()：選択された駒が移動可能なリストをゲット
+- int getChooseablePosition()：駒の移動先の位置を取得
 - Bord getNextBord(Bord：盤面, Piece：駒, int：位置)：次の盤面の生成
 - void checkVictory()：勝敗の判定
 - void changePlayer()：指し手の交代
-- void setPlayer(Piece)：所有している駒をセット
+- void set(Piece)：所有している駒をセット
 - void getPlayer(Piece)：所有している駒をゲット
 
 ---
@@ -95,9 +107,17 @@ C : GameControler
 ### フィールド
 
 ### メソッド
-- Bord operator(Bord：盤面, Piece：駒, int：位置)：駒を移動させ、次の盤面を返す
-- Selection[] availablePiece(Bord：盤面, Piece[]：駒のリスト)：駒のリストがそれぞれ移動可能なSelectionのリストを返す
-- void piceMove(Bord：盤面, Piece：駒, int：移動先)：駒を移動先に移動させる
+- Status operator(Staus：状況, Piece：駒, int：位置)：駒を移動させ、次の盤面を返す
+- int[] availablePiece(Bord：盤面, Piece：駒)：駒が移動可能なリストを返す
+
+---
+# Status
+## 説明
+盤面、駒の所有を示し、その場面の状況を表す。
+
+## フィールド
+- Board board：盤面を表す
+- Player[] playerPiece：プレイヤーが所有する駒を表す
 
 ---
 
@@ -121,14 +141,15 @@ C : GameControler
 - int pieceClass：駒の種類
 - int position：現在地
 - boolean promote：成りかどうか
+- int[]：移動可能なリスト
 
 ### メソッド
-- boolean move(Bord：盤面, int：移動先)：移動できるか判定
+- int[] move(Bord：盤面)：現在地から移動可能なリスト
 
 ---
-## Selection
+## Chooseable
 #### 説明
-駒の種類と、移動可能な番地の組み合わせ
+駒と、移動可能な番地の組み合わせ
 
 #### フィールド
 - Piece 駒の種類
@@ -141,7 +162,7 @@ C : GameControler
 
 ### フィールド
 - Piece[] havePiece：所有している駒
-- Selection[] availablePiece：移動可能な駒と行先
+- Chooseable[] availablePiece：移動可能な駒と行先
 
 ### メソッド
 
