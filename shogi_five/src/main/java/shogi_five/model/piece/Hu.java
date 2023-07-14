@@ -1,7 +1,7 @@
-package model.hu;
+package shogi_five.model.piece;
 
 import java.util.ArrayList;
-import model.piece;
+import shogi_five.model.*;
 
 /*
  * 歩の駒
@@ -29,48 +29,46 @@ public class Hu extends Piece{
     public ArrayList<Integer> move(){
         ArrayList<Integer> moveList = new ArrayList<>();
 
-        if !this.promote{//成っていない
-            if this.owner{//プレイヤーが所有
+        if (!this.promote){//成っていない
+            if (this.owner){//プレイヤーが所有
                 moveList.add(this.position-5);
             }else{
                 moveList.add(this.position+5);
             }
-        }else{//成っているとき
-            if this.position == 0{
+        } else {//成っているとき
+            if (this.position == 0){
                 moveList.add(1);
                 moveList.add(5);
-                moveList.add(6);
-            } else if this.position == 4{
+            } else if (this.position == 4){
                 moveList.add(3);
-                moveList.add(8);
                 moveList.add(9);
-            } else if this.position == 20{
+            } else if (this.position == 20){
                 moveList.add(15);
                 moveList.add(16);
                 moveList.add(21);
-            } else if this.position == 24{
+            } else if (this.position == 24){
                 moveList.add(18);
                 moveList.add(19);
                 moveList.add(23);
-            } else if this.position % 5 == 0{//左端の列
+            } else if (this.position % 5 == 0){//左端の列
                 moveList.add(this.position - 5);//上
                 moveList.add(this.position - 5 + 1);//右上
                 moveList.add(this.position + 1);//右
-                moveList.add(this.position + 5 + 1);//右下
+                //moveList.add(this.position + 5 + 1);//右下
                 moveList.add(this.position + 5);//下
-            } else if this.position % 5 == 4{//右端の列
+            } else if (this.position % 5 == 4){//右端の列
                 moveList.add(this.position - 5);//上
                 moveList.add(this.position - 5 - 1);//左上
                 moveList.add(this.position - 1);//左
-                moveList.add(this.position + 5 - 1);//左下
+                //moveList.add(this.position + 5 - 1);//左下
                 moveList.add(this.position + 5);//下
-            } else if this.position < 5{//一番上の行
+            } else if (this.position < 5){//一番上の行
                 moveList.add(this.position + 1);//右
-                moveList.add(this.position + 5 + 1);//右下
+                //moveList.add(this.position + 5 + 1);//右下
                 moveList.add(this.position + 5);//下
-                moveList.add(this.position + 5 - 1);//左下
+                //moveList.add(this.position + 5 - 1);//左下
                 moveList.add(this.position - 1);//左
-            } else if this.position > 19 && this.position < 25{//一番下の行
+            } else if (this.position > 19 && this.position < 25){//一番下の行
                 moveList.add(this.position + 1);//右
                 moveList.add(this.position - 5 + 1);//右上
                 moveList.add(this.position - 5);//上
@@ -80,9 +78,9 @@ public class Hu extends Piece{
                 moveList.add(this.position - 5);//上
                 moveList.add(this.position - 5 + 1);//右上
                 moveList.add(this.position + 1);//右
-                moveList.add(this.position + 5 + 1);//右下
+                //moveList.add(this.position + 5 + 1);//右下
                 moveList.add(this.position + 5);//下
-                moveList.add(this.position + 5 - 1);//左下
+                //moveList.add(this.position + 5 - 1);//左下
                 moveList.add(this.position - 1);//左
                 moveList.add(this.position + 5 - 1);//左下
             }
@@ -92,17 +90,17 @@ public class Hu extends Piece{
     }
 
     /*
-     * 駒を成らせる
+     * 成りのゲッター
      */
-    public void promotedPice(){
-        this.promote = true;
+    public boolean getPromote(){
+        return this.promote;
     }
 
     /*
-     * 駒の成りを解除する
+     * 成りのセッター
      */
-    public void demotedPice(){
-        this.promote = false;
+    public void setPromote(boolean promote){
+        this.promote = promote;
     }
 
     /*
