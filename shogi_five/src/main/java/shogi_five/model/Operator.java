@@ -1,9 +1,9 @@
-package model.operator;
+package shogi_five.model;
 
-import model.board.Board;
-import model.piece.Piece;
-import model.selection.Selection;
-import model.Status;
+import shogi_five.model.Board;
+import shogi_five.model.piece.Piece;
+import shogi_five.model.Chooseable;
+import shogi_five.model.Status;
 
 public class Operator {
     /*
