@@ -7,7 +7,7 @@ import shogi_five.model.*;
  * 飛車の駒
  */
 
-public class Hisha extends Piece{
+public class Kaku extends Piece{
     private int pieceClass;//駒の種類
     private int position;//駒の現在地
     private boolean promote;//成りかどうか
@@ -16,7 +16,7 @@ public class Hisha extends Piece{
     /*
      * コンストラクタ
      */
-    public Hisha(int position, boolean owner){
+    public Kaku(int position, boolean owner){
         this.pieceClass = 4;
         this.position = position;
         this.promote = false;
