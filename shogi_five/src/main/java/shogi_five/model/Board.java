@@ -1,6 +1,6 @@
-package model.board;
+package shogi_five.model;
 
-import model.Piece.Piece;
+import shogi_five.model.piece.Piece;
 
 public class Board {
     /*

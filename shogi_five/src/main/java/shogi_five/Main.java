@@ -1,10 +1,10 @@
-package app;
+package shogi_five;
 
-import contoller.GameController;
-import model.board.Board;
-import model.board.Human;
-import model.board.Player;
-import view.View;
+import shogi_five.contoller.GameController;
+import shogi_five.model.Board;
+import shogi_five.model.Human;
+import shogi_five.model.Player;
+import shogi_five.view.View;
 
 public class App{
     public static void main(String[] args){
