@@ -1,7 +1,7 @@
-package model.player;
+package shogi_five.model;
 
-import model.piece.Piece;
-import model.selection.Selection;
+import shogi_five.model.piece.Piece;
+import shogi_five.model.Chooseable;
 
 public abstract class Player {
     private Piece[] ownedPieces;

@@ -1,7 +1,8 @@
 package shogi_five.model.piece;
 
 import java.util.ArrayList;
-import shogi_five.model.*;
+import shogi_five.model.piece.Piece;
+import shogi_five.model.Board;
 
 /*
  * 歩の駒
@@ -26,7 +27,7 @@ public class Ou extends Piece{
     /*
      * 動きを定義する
      */
-    public ArrayList<Integer> move(){
+    public ArrayList<Integer> move(Board board){
         ArrayList<Integer> moveList = new ArrayList<>();
 
         if (this.position == 0){

@@ -26,7 +26,7 @@ public class Hu extends Piece{
     /*
      * 動きを定義する
      */
-    public ArrayList<Integer> move(){
+    public ArrayList<Integer> move(Board board){
         ArrayList<Integer> moveList = new ArrayList<>();
 
         if (!this.promote){//成っていない

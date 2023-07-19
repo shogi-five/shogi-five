@@ -11,7 +11,4 @@ public abstract class Piece {
     private int position;//駒の現在地
     private boolean promote;//成りかどうか
     private boolean owner;//所有者
-
-    //動きを定義する
-    public abstract ArrayList<Integer> move();
 }

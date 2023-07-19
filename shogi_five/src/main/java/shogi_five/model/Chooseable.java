@@ -1,6 +1,7 @@
 
-package model;
-import model.Piece;
+package shogi_five.model;
+
+import shogi_five.model.piece.Piece;
 
 //コマの移動する種類と移動先を持つクラス
 public class Chooseable{
@@ -11,7 +12,7 @@ public class Chooseable{
 
     //コンストラクタ
     public Chooseable(Piece pieceClass, int moveablePosition){
-        this.piceClass = pieceClass;
+        this.pieceClass = pieceClass;
         this.moveablePosition = moveablePosition;
     }
 
