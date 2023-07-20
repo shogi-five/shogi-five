@@ -17,7 +17,11 @@ public class Operator {
      * @param next 駒の行先
      * @return Status 駒を移動させたStatus
      */
-    public static Status operator(Board board, Human human, AI ai, int now, int next){
+    public static Status operator(Status status, int now, int next){
+        Board board = (Board)status.getBoard();
+        Human human = status.getHuman();
+        AI ai = status.getAI();
+
         Piece piece = board.getPiece(now);//駒を取得
 
         Status next_Status = new Status(board, human, ai);
@@ -140,7 +144,9 @@ public class Operator {
                 board.setPiece(piece, next);
             }
 
-            //駒の所有権を移動
+            //新たなStateを作成
+            Status next_status = new Status(board, human, ai);
+            return next_Status;
         }
 
         //Statusにセット

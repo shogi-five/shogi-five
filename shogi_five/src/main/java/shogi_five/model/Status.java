@@ -7,13 +7,13 @@ import java.util.ArrayList;
 
 public class Status {
     Board board;
-    Player human;
-    Player ai;
+    Human human;
+    AI ai;
 
     /*
      * コンストラクタ
      */
-    public Status(Board board, Player human, Player ai){
+    public Status(Board board, Human human, AI ai){
         this.board = board;
         this.human = human;
         this.ai = ai;
@@ -22,20 +22,20 @@ public class Status {
     public Board getBoard(){
         return this.board;
     }
-    public Player getHuman(){
+    public Human getHuman(){
         return this.human;
     }
-    public Player getAI(){
+    public AI getAI(){
         return this.ai;
     }
 
     public void setBoard(Board board){
         this.board = board;
     }
-    public void setHuman(Player human){
+    public void setHuman(Human human){
         this.human = human;
     }
-    public void setAI(Player ai){
+    public void setAI(AI ai){
         this.ai = ai;
     }
 }
