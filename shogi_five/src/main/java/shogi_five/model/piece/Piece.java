@@ -16,5 +16,8 @@ public abstract class Piece {
 
     public abstract ArrayList<Integer> move(Board board);
     public abstract void setPosition(int position);
+    public abstract void setPromote(boolean promote);
+    public abstract void setOwner(boolean owner);
     public abstract boolean getOwner();
+    public abstract int getPieceClass();
 }

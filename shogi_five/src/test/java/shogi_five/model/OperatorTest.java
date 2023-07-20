@@ -53,9 +53,9 @@ public class OperatorTest {
         ArrayList<Integer> availableList = Operator.availableMove(board, position);
 
         //駒の移動
-        Status next_Status = Operator.operator(board, null, null, position, availableList.get(0));
+        Status next_status = Operator.operator(board, null, null, position, availableList.get(0));
 
         //正解と比較
-        assertEquals(next_Status.getBoard().getPiece(10), hu);
+        assertEquals(next_status.getBoard().getPiece(10), hu);
     }
 }
