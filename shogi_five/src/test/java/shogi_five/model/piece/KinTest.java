@@ -10,11 +10,10 @@ import org.junit.Test;
 
 import shogi_five.model.Board;
 
-/**
- * 王の単体テスト
+/*
+ * 歩の単体テスト
  */
-public class OuTest 
-{
+public class KinTest {
     /*
      * 駒の動ける場所をテスト
      */
@@ -26,12 +25,12 @@ public class OuTest
             board.setPiece(null, j);
         }
 
-        //王を置く
-        int pos = 23;
-        board.setPiece(new Ou(pos, true), pos);
+        //金を置く
+        int pos = 24;
+        board.setPiece(new Kin(pos, true), pos);
 
         //動く位置に駒を置く
-        //board.setPiece(new Gin(6,true), 6);
+        //board.setPiece(new Gin(23,true), 23);
 
         //表示
         ArrayList<Integer> expected = board.getPiece(pos).move(board);
@@ -40,18 +39,18 @@ public class OuTest
         }
 
     }
-    /*
+        /*
      * 駒が成るかテスト
      */
     @Test
     public void testPromotedPiece() {
-        Ou ou = new Ou(0, true);
-        assertFalse(ou.getPromote());
+        Kin kin = new Kin(0, true);
+        assertFalse(kin.getPromote());
 
-        ou.setPromote(true);
-        assertTrue(ou.getPromote());
+        kin.setPromote(true);
+        assertTrue(kin.getPromote());
         
-        ou.setPromote(false);
-        assertFalse(ou.getPromote());
+        kin.setPromote(false);
+        assertFalse(kin.getPromote());
     }
 }

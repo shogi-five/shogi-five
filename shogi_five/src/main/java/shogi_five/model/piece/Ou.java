@@ -79,7 +79,7 @@ public class Ou extends Piece{
             moveList.add(this.position + 1);//右
             moveList.add(this.position + 5 + 1);//右下
             moveList.add(this.position + 5);//下
-            moveList.add(this.position + 5 - 1);//左下
+            moveList.add(this.position - 5 - 1);//左上
             moveList.add(this.position - 1);//左
             moveList.add(this.position + 5 - 1);//左下
         }
