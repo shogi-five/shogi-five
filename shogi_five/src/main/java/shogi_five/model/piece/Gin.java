@@ -18,6 +18,9 @@ public class Gin extends Piece{
      */
     public Gin(int position, boolean owner){
         this.pieceClass = 3;
+        if(owner){
+            this.pieceClass += 6;
+        }
         this.position = position;
         this.promote = false;
         this.owner = owner;

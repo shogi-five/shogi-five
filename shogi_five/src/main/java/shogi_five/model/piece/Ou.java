@@ -19,6 +19,9 @@ public class Ou extends Piece{
      */
     public Ou(int position, boolean owner){
         this.pieceClass = 1;
+        if(owner){
+            this.pieceClass += 6;
+        }
         this.position = position;
         this.promote = false;
         this.owner = owner;
@@ -80,7 +83,13 @@ public class Ou extends Piece{
             moveList.add(this.position - 1);//左
             moveList.add(this.position + 5 - 1);//左下
         }
-
+        //自分の駒がある時、moveListから取り除く
+        for(int i = 0;i < moveList.size();i++){
+            if((board.getPiece(moveList.get(i)) != null)&&(board.getPiece(moveList.get(i)).getOwner() == this.owner)){
+                moveList.remove(i);
+                i--;
+            }
+        }
         return moveList;
     }
 

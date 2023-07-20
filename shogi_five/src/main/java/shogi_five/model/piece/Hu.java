@@ -18,6 +18,9 @@ public class Hu extends Piece{
      */
     public Hu(int position, boolean owner){
         this.pieceClass = 6;
+        if(owner){
+            this.pieceClass += 6;
+        }
         this.position = position;
         this.promote = false;
         this.owner = owner;
