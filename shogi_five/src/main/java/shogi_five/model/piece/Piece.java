@@ -2,6 +2,8 @@ package shogi_five.model.piece;
 
 import java.util.ArrayList;
 
+import shogi_five.model.Board;
+
 /**
  * 将棋の駒を表す抽象クラス
  */
@@ -11,4 +13,6 @@ public abstract class Piece {
     private int position;//駒の現在地
     private boolean promote;//成りかどうか
     private boolean owner;//所有者
+
+    public abstract ArrayList<Integer> move(Board board);
 }
