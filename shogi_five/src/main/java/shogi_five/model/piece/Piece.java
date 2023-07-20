@@ -15,4 +15,5 @@ public abstract class Piece {
     private boolean owner;//所有者
 
     public abstract ArrayList<Integer> move(Board board);
+    public abstract void setPosition(int position);
 }
