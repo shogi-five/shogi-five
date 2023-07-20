@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import shogi_five.model.Board;
+import shogi_five.model.piece.*;
 
 /**
  * Boardの単体テスト
@@ -20,8 +21,8 @@ public class BoardTest{
     @Test
     public void testMove() {
         Board board = new Board();
-        
-        //assertEquals();
+        System.out.println(board.getPiece(8));
+        //assertEquals(board.getPiece(8), null);
     }
 
 }
