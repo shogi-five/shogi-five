@@ -85,7 +85,14 @@ public class Hu extends Piece{
                 moveList.add(this.position + 5 - 1);//左下
             }
         }
-
+        //自分の駒がある時、moveListから取り除く
+        for(int i = 0;i < moveList.size();i++){
+            if((board.getPiece(moveList.get(i)) != null)&&(board.getPiece(moveList.get(i)).getOwner() == this.owner)){
+                moveList.remove(i);
+                i--;
+            }
+        }
+        
         return moveList;
     }
 
@@ -114,5 +121,11 @@ public class Hu extends Piece{
      */
     public int getPosition(){
         return this.position;
+    }
+    /*
+     * 所有者のゲッター
+     */
+    public boolean getOwner(){
+        return this.owner;
     }
 }

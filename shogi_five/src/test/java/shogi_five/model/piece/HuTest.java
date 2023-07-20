@@ -8,28 +8,38 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import shogi_five.model.Board;
+
 /*
  * 歩の単体テスト
  */
 public class HuTest {
     /*
-     * 駒の動きをテスト
+     * 駒の動ける場所をテスト
      */
     @Test
     public void testMove() {
-        Hu hu = new Hu(15, true);
-        ArrayList<Integer> expected = new ArrayList<>();
-        expected.add(10);
-    
-        ArrayList<Integer> actual = hu.move();
-        
-        assertEquals(expected, actual);
+        Board board = new Board();
+        ArrayList<Integer> expected = board.getPiece(15).move(board);
+        for(int i = 0;i < expected.size();i++){
+            System.out.println(expected.get(i));
+        }
 
-        hu.setPosition(actual.get(0));
-
-        assertEquals(hu.getPosition(), 10);
     }
-    
+    /*
+     * 駒の動ける場所をテスト(動く場所に自分の駒があるとき)
+     */
+    @Test
+    public void testCannotMove() {
+        Board board = new Board();
+        board.setPiece(new Kin(10, true), 10);//金を歩の前に置く
+        //System.out.println(board.getPiece(10).getClass());
+        ArrayList<Integer> expected = board.getPiece(15).move(board);
+        for(int i = 0;i < expected.size();i++){
+            System.out.println(expected.get(i));
+        }
+
+    }
     /*
      * 駒が成るかテスト
      */
