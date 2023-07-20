@@ -18,6 +18,9 @@ public class Kaku extends Piece{
      */
     public Kaku(int position, boolean owner){
         this.pieceClass = 4;
+        if(owner){
+            this.pieceClass += 6;
+        }
         this.position = position;
         this.promote = false;
         this.owner = owner;

@@ -18,6 +18,9 @@ public class Hisha extends Piece{
      */
     public Hisha(int position, boolean owner){
         this.pieceClass = 5;
+        if(owner){
+            this.pieceClass += 6;
+        }
         this.position = position;
         this.promote = false;
         this.owner = owner;
