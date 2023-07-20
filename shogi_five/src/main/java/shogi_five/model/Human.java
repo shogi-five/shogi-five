@@ -12,14 +12,14 @@ public class Human extends Player{
 
     //フィールド変数
     private ArrayList<Piece> havePiece;  //所有している駒
-    private Chooseable[] availblePiece; //移動可能なコマとその行先
+    private ArrayList<Chooseable> availblePiece; //移動可能なコマとその行先
 
 
     //コンストラクター
-    public Human(ArrayList<Piece> havePiece, Chooseable[] availblePiece){
+    public Human(ArrayList<Piece> havePiece, ArrayList<Chooseable> availblePiece){
         super(havePiece, availblePiece);
         this.havePiece = (ArrayList<Piece>)havePiece.clone();              // 所有しているコマをディープコピー
-        this.availblePiece = availblePiece.clone();      //移動可能なコマとその行先をディープコピー
+        this.availblePiece = (ArrayList<Chooseable>)availblePiece.clone();      //移動可能なコマとその行先をディープコピー
     }
 
     /*
