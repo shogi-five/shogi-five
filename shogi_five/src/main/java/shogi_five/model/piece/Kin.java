@@ -18,6 +18,9 @@ public class Kin extends Piece{
      */
     public Kin(int position, boolean owner){
         this.pieceClass = 2;
+        if(owner){
+            this.pieceClass += 6;
+        }
         this.position = position;
         this.promote = false;
         this.owner = owner;
