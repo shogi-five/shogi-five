@@ -18,4 +18,24 @@ public class Status {
         this.human = human;
         this.ai = ai;
     }
+
+    public Board getBoard(){
+        return this.board;
+    }
+    public Player getHuman(){
+        return this.human;
+    }
+    public Player getAI(){
+        return this.ai;
+    }
+
+    public void setBoard(Board board){
+        this.board = board;
+    }
+    public void setHuman(Player human){
+        this.human = human;
+    }
+    public void setAI(Player ai){
+        this.ai = ai;
+    }
 }
