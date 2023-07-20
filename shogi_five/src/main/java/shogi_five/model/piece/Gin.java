@@ -17,9 +17,16 @@ public class Gin extends Piece{
      * コンストラクタ
      */
     public Gin(int position, boolean owner){
+<<<<<<< HEAD
+        if (owner){
+            setPieceClass(5);
+        }else{
+            setPieceClass(15);
+=======
         this.pieceClass = 3;
         if(owner){
             this.pieceClass += 6;
+>>>>>>> origin/master
         }
         this.position = position;
         this.promote = false;
@@ -109,6 +116,7 @@ public class Gin extends Piece{
         return moveList;
     }
 
+
     /*
      * 成りのゲッター
      */
@@ -140,5 +148,23 @@ public class Gin extends Piece{
      */
     public boolean getOwner(){
         return this.owner;
+    }
+    /*
+     * 所有者のセッター
+     */
+    public void setOwner(boolean owner){
+        this.owner = owner;
+    }    
+    /*
+     * pieceClassのゲッター
+     */
+    public int getPieceClass(){
+        return this.pieceClass;
+    }
+    /*
+     * pieceClassのセッター
+     */
+    public void setPieceClass(int pieceClass){
+        this.pieceClass = pieceClass;
     }
 }
