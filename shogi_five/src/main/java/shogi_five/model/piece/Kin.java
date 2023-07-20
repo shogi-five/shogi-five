@@ -58,4 +58,10 @@ public class Kin extends Piece{
     public int getPosition(){
         return this.position;
     }
+    /*
+     * 所有者のゲッター
+     */
+    public boolean getOwner(){
+        return this.owner;
+    }
 }
