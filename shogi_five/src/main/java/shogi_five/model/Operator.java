@@ -17,12 +17,12 @@ public class Operator {
      * @param next 駒の行先
      * @return Status 駒を移動させたStatus
      */
-    public Status operator(Board board, Player human, Player ai, int now, int next){
+    public static Status operator(Board board, Player human, Player ai, int now, int next){
         Piece piece = board.getPiece(now);//駒を取得
 
         Status next_Status = new Status(board, human, ai);
 
-        if (board.getPiece(next).equals(null)){ //移動先に駒がない場合
+        if (board.getPiece(next) == null){ //移動先に駒がない場合
             //駒を移動
             piece.setPosition(next);
             board.setPiece(null, now);
@@ -43,7 +43,7 @@ public class Operator {
      * @param position 駒の位置
      * @return ArrayList<Integer> 駒が移動可能な位置のリスト
      */
-    public ArrayList<Integer> availableMove(Board board, int position){
+    public static ArrayList<Integer> availableMove(Board board, int position){
         //駒を取得
         Piece piece = board.getPiece(position);        
         //駒が移動できるリストを取得
