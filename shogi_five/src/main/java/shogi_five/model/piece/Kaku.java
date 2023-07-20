@@ -17,7 +17,11 @@ public class Kaku extends Piece{
      * コンストラクタ
      */
     public Kaku(int position, boolean owner){
-        this.pieceClass = 4;
+        if (owner){
+            setPieceClass(3);
+        }else{
+            setPieceClass(13);
+        }
         this.position = position;
         this.promote = false;
         this.owner = owner;
@@ -31,6 +35,7 @@ public class Kaku extends Piece{
 
         return moveList;
     }
+
 
     /*
      * 成りのゲッター
@@ -63,5 +68,23 @@ public class Kaku extends Piece{
      */
     public boolean getOwner(){
         return this.owner;
+    }
+    /*
+     * 所有者のセッター
+     */
+    public void setOwner(boolean owner){
+        this.owner = owner;
+    }    
+    /*
+     * pieceClassのゲッター
+     */
+    public int getPieceClass(){
+        return this.pieceClass;
+    }
+    /*
+     * pieceClassのセッター
+     */
+    public void setPieceClass(int pieceClass){
+        this.pieceClass = pieceClass;
     }
 }

@@ -20,4 +20,5 @@ public abstract class Piece {
     public abstract void setOwner(boolean owner);
     public abstract boolean getOwner();
     public abstract int getPieceClass();
+    public abstract boolean getPromote();
 }
