@@ -47,7 +47,7 @@ public class Operator {
             captured_piece.setPromote(false);//成りを解除
 
             //駒を移動
-            if (piece.getOwner()){//もし人間が取得したら
+            if (piece.getOwner() == true){//もし人間が取得したら
 
                 //駒の所有権を移動
                 captured_piece.setOwner(true);//駒自身に対して
@@ -58,36 +58,46 @@ public class Operator {
 
                 //相手の駒を持駒に移動
                 switch (pieceClass){
-                    case 2:
+                    case 2://人間の飛車
+                        captured_piece.setPosition(35);
                         board.setPiece(captured_piece, 35);
                         break;
-                    case 3:
+                    case 3://人間の角
+                        captured_piece.setPosition(36);
                         board.setPiece(captured_piece, 36);
                         break;                    
-                    case 4:
+                    case 4://人間の金
+                        captured_piece.setPosition(37);
                         board.setPiece(captured_piece, 37);
                         break;                    
-                    case 5:
+                    case 5://人間の銀
+                        captured_piece.setPosition(38);
                         board.setPiece(captured_piece, 38);
                         break;                    
-                    case 6:
+                    case 6://人間の歩
+                        captured_piece.setPosition(39);
                         board.setPiece(captured_piece, 39);
                         break;                    
-                    case 12:
+                    case 12://AIの飛車
+                        captured_piece.setPosition(40);
                         board.setPiece(captured_piece, 40);
                         break;                    
-                    case 13:
+                    case 13://AIの角
+                        captured_piece.setPosition(41);
                         board.setPiece(captured_piece, 41);
                         break;                    
-                    case 14:
+                    case 14://AIの金
+                        captured_piece.setPosition(42);
                         board.setPiece(captured_piece, 42);
                         break;                    
-                    case 15:
+                    case 15://AIの銀
+                        captured_piece.setPosition(43);
                         board.setPiece(captured_piece, 43);
                         break;                    
-                    case 16:
+                    case 16://AIの歩
+                        captured_piece.setPosition(44);
                         board.setPiece(captured_piece, 44);
-                        break;                    
+                        break;
                 }
 
                 //自分の駒を相手の位置に移動
@@ -106,34 +116,34 @@ public class Operator {
 
                 //相手の駒を持駒に移動
                 switch (pieceClass){
-                    case 2:
+                    case 2://人間の飛車
                         board.setPiece(captured_piece, 25);
                         break;
-                    case 3:
+                    case 3://人間の角
                         board.setPiece(captured_piece, 26);
                         break;                    
-                    case 4:
+                    case 4://人間の金
                         board.setPiece(captured_piece, 27);
                         break;                    
-                    case 5:
+                    case 5://人間の銀
                         board.setPiece(captured_piece, 28);
                         break;                    
-                    case 6:
+                    case 6://人間の歩
                         board.setPiece(captured_piece, 29);
                         break;                    
-                    case 12:
+                    case 12://AIの飛車
                         board.setPiece(captured_piece, 30);
                         break;                    
-                    case 13:
+                    case 13://AIの角
                         board.setPiece(captured_piece, 31);
                         break;                    
-                    case 14:
+                    case 14://AIの金
                         board.setPiece(captured_piece, 32);
                         break;                    
-                    case 15:
+                    case 15://AIの銀
                         board.setPiece(captured_piece, 33);
                         break;                    
-                    case 16:
+                    case 16://AIの歩
                         board.setPiece(captured_piece, 34);
                         break;                    
                 }
