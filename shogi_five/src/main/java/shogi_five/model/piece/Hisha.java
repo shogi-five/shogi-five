@@ -17,10 +17,16 @@ public class Hisha extends Piece{
      * コンストラクタ
      */
     public Hisha(int position, boolean owner){
+<<<<<<< HEAD
         if (owner){
             setPieceClass(2);
         }else{
             setPieceClass(12);
+=======
+        this.pieceClass = 5;
+        if(owner){
+            this.pieceClass += 6;
+>>>>>>> origin/master
         }
         this.position = position;
         this.promote = false;

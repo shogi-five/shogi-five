@@ -17,10 +17,16 @@ public class Hu extends Piece{
      * コンストラクタ
      */
     public Hu(int position, boolean owner){
+<<<<<<< HEAD
         if (owner){
             setPieceClass(6);
         }else{
             setPieceClass(16);
+=======
+        this.pieceClass = 6;
+        if(owner){
+            this.pieceClass += 6;
+>>>>>>> origin/master
         }
         this.position = position;
         this.promote = false;

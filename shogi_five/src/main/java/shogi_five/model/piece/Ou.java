@@ -18,10 +18,16 @@ public class Ou extends Piece{
      * コンストラクタ
      */
     public Ou(int position, boolean owner){
+<<<<<<< HEAD
         if (owner){
             setPieceClass(1);
         }else{
             setPieceClass(11);
+=======
+        this.pieceClass = 1;
+        if(owner){
+            this.pieceClass += 6;
+>>>>>>> origin/master
         }
         this.position = position;
         this.promote = false;
@@ -84,7 +90,13 @@ public class Ou extends Piece{
             moveList.add(this.position - 1);//左
             moveList.add(this.position + 5 - 1);//左下
         }
-
+        //自分の駒がある時、moveListから取り除く
+        for(int i = 0;i < moveList.size();i++){
+            if((board.getPiece(moveList.get(i)) != null)&&(board.getPiece(moveList.get(i)).getOwner() == this.owner)){
+                moveList.remove(i);
+                i--;
+            }
+        }
         return moveList;
     }
 

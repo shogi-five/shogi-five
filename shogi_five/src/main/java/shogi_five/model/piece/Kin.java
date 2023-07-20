@@ -17,10 +17,16 @@ public class Kin extends Piece{
      * コンストラクタ
      */
     public Kin(int position, boolean owner){
+<<<<<<< HEAD
         if (owner){
             setPieceClass(4);
         }else{
             setPieceClass(14);
+=======
+        this.pieceClass = 2;
+        if(owner){
+            this.pieceClass += 6;
+>>>>>>> origin/master
         }
         this.position = position;
         this.promote = false;

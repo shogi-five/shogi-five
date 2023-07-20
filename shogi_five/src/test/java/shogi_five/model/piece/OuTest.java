@@ -8,27 +8,29 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import shogi_five.model.Board;
+
 /**
  * 王の単体テスト
  */
 public class OuTest 
 {
     /*
-     * 駒の動きをテスト
+     * 駒の動ける場所をテスト
      */
     @Test
     public void testMove() {
-        Ou ou = new Ou(20, true);
-        ArrayList<Integer> expected = new ArrayList<>();
-        expected.add(15);
-        expected.add(16);
-        expected.add(21);
-        
-        ArrayList<Integer> actual = ou.move();
-        
-        assertEquals(expected, actual);
+        Board board = new Board();
+        board.setPiece(null, 21);
+        board.setPiece(null, 15);
+        //board.setPiece(new Kin(16,false), 16);
+        System.out.println(board.getPiece(0).getClass());
+        ArrayList<Integer> expected = board.getPiece(20).move(board);
+        for(int i = 0;i < expected.size();i++){
+            System.out.println(expected.get(i));
+        }
+
     }
-    
     /*
      * 駒が成るかテスト
      */

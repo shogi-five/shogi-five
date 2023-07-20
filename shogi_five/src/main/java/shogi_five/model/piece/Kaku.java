@@ -17,10 +17,16 @@ public class Kaku extends Piece{
      * コンストラクタ
      */
     public Kaku(int position, boolean owner){
+<<<<<<< HEAD
         if (owner){
             setPieceClass(3);
         }else{
             setPieceClass(13);
+=======
+        this.pieceClass = 4;
+        if(owner){
+            this.pieceClass += 6;
+>>>>>>> origin/master
         }
         this.position = position;
         this.promote = false;

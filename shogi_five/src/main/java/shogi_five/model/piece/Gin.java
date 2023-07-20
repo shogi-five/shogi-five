@@ -17,10 +17,16 @@ public class Gin extends Piece{
      * コンストラクタ
      */
     public Gin(int position, boolean owner){
+<<<<<<< HEAD
         if (owner){
             setPieceClass(5);
         }else{
             setPieceClass(15);
+=======
+        this.pieceClass = 3;
+        if(owner){
+            this.pieceClass += 6;
+>>>>>>> origin/master
         }
         this.position = position;
         this.promote = false;
