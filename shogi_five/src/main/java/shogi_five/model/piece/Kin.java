@@ -17,9 +17,16 @@ public class Kin extends Piece{
      * コンストラクタ
      */
     public Kin(int position, boolean owner){
+<<<<<<< HEAD
+        if (owner){
+            setPieceClass(4);
+        }else{
+            setPieceClass(14);
+=======
         this.pieceClass = 2;
         if(owner){
             this.pieceClass += 6;
+>>>>>>> origin/master
         }
         this.position = position;
         this.promote = false;
@@ -34,6 +41,7 @@ public class Kin extends Piece{
 
         return moveList;
     }
+
 
     /*
      * 成りのゲッター
@@ -66,5 +74,23 @@ public class Kin extends Piece{
      */
     public boolean getOwner(){
         return this.owner;
+    }
+    /*
+     * 所有者のセッター
+     */
+    public void setOwner(boolean owner){
+        this.owner = owner;
+    }    
+    /*
+     * pieceClassのゲッター
+     */
+    public int getPieceClass(){
+        return this.pieceClass;
+    }
+    /*
+     * pieceClassのセッター
+     */
+    public void setPieceClass(int pieceClass){
+        this.pieceClass = pieceClass;
     }
 }

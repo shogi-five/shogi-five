@@ -18,9 +18,16 @@ public class Ou extends Piece{
      * コンストラクタ
      */
     public Ou(int position, boolean owner){
+<<<<<<< HEAD
+        if (owner){
+            setPieceClass(1);
+        }else{
+            setPieceClass(11);
+=======
         this.pieceClass = 1;
         if(owner){
             this.pieceClass += 6;
+>>>>>>> origin/master
         }
         this.position = position;
         this.promote = false;
@@ -124,5 +131,23 @@ public class Ou extends Piece{
      */
     public boolean getOwner(){
         return this.owner;
+    }
+    /*
+     * 所有者のセッター
+     */
+    public void setOwner(boolean owner){
+        this.owner = owner;
+    }    
+    /*
+     * pieceClassのゲッター
+     */
+    public int getPieceClass(){
+        return this.pieceClass;
+    }
+    /*
+     * pieceClassのセッター
+     */
+    public void setPieceClass(int pieceClass){
+        this.pieceClass = pieceClass;
     }
 }

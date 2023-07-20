@@ -17,9 +17,16 @@ public class Hu extends Piece{
      * コンストラクタ
      */
     public Hu(int position, boolean owner){
+<<<<<<< HEAD
+        if (owner){
+            setPieceClass(6);
+        }else{
+            setPieceClass(16);
+=======
         this.pieceClass = 6;
         if(owner){
             this.pieceClass += 6;
+>>>>>>> origin/master
         }
         this.position = position;
         this.promote = false;
@@ -131,4 +138,23 @@ public class Hu extends Piece{
     public boolean getOwner(){
         return this.owner;
     }
+    /*
+     * 所有者のセッター
+     */
+    public void setOwner(boolean owner){
+        this.owner = owner;
+    }    
+    /*
+     * pieceClassのゲッター
+     */
+    public int getPieceClass(){
+        return this.pieceClass;
+    }
+    /*
+     * pieceClassのセッター
+     */
+    public void setPieceClass(int pieceClass){
+        this.pieceClass = pieceClass;
+    }
+
 }
