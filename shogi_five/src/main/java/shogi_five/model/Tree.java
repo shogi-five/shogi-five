@@ -10,10 +10,12 @@ public class Tree{
     /*
      * コンストラクタ
      */
-    public Tree(){}
+    public Tree(){
+        this.node = new ArrayList<>();
+    }
 
     /*
      * minimax法で探索を行う．決定したNodeを返す．
      */
-    public Node miniMax(ArrayList<Node> node, depth){}
+    public Node miniMax(ArrayList<Node> node,int depth){}
 }
