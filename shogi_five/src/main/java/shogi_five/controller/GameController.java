@@ -53,9 +53,7 @@ public class GameController {
 
             //*** AIの操作
 
-            ArrayList<Integer> inferenceResults = this.status.getAI().inference(this.status);//AIの探索で[駒の位置，動かす場所]を返す
-
-            Status AINextStatus = this.operator.operator(this.status, inferenceResults.get(0), inferenceResults.get(1));//盤面を更新
+            Status AINextStatus = this.status.getAI().inference(this.status);//AIの探索
 
             this.updateStatus(AINextStatus);//Statusの更新
 
