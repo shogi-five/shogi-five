@@ -4,6 +4,8 @@ import shogi_five.model.piece.Piece;
 import shogi_five.model.Chooseable;
 import shogi_five.model.Status;
 
+import shogi_five.model.Tree;
+
 import java.util.ArrayList;
 
 //プレイヤーを表すクラス
@@ -25,11 +27,12 @@ public class AI extends Player{
 
     /*
      * 探索を行う
-     * @ return ArrayList<Integer> inferenceResults [駒の位置，動かす場所]
+     * @ return Status nextStatus 探索の結果得られたStatusを返す
      */
-    public ArrayList<Integer> inference(Status status){
-        ArrayList<Integer> inferenceResults = new ArrayList<>();
-        return inferenceResults;
+    public Status inference(Status status){
+        Tree search = new Tree();
+        Status nextStatus = search.miniMax().getStatus();
+        return nextStatus;
     }
 
     /*
