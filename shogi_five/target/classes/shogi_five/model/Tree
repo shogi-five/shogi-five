@@ -1,0 +1,8 @@
+package shogi_five.model;
+
+public class Tree{
+    private Status status;
+    private int evaluation;
+    private int parent;
+    
+}
