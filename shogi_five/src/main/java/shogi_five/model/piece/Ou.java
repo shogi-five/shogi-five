@@ -18,16 +18,10 @@ public class Ou extends Piece{
      * コンストラクタ
      */
     public Ou(int position, boolean owner){
-<<<<<<< HEAD
         if (owner){
             setPieceClass(1);
         }else{
             setPieceClass(11);
-=======
-        this.pieceClass = 1;
-        if(owner){
-            this.pieceClass += 6;
->>>>>>> origin/master
         }
         this.position = position;
         this.promote = false;
