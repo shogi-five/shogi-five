@@ -2,6 +2,7 @@ package shogi_five.model;
 
 import shogi_five.model.piece.Piece;
 import shogi_five.model.Chooseable;
+import shogi_five.model.Status;
 
 import java.util.ArrayList;
 
@@ -20,6 +21,15 @@ public class AI extends Player{
         super(havePiece, availblePiece);
         this.havePiece = (ArrayList<Piece>)havePiece.clone();              // 所有しているコマをディープコピー
         this.availblePiece = (ArrayList<Chooseable>)availblePiece.clone();      //移動可能なコマとその行先をディープコピー
+    }
+
+    /*
+     * 探索を行う
+     * @ return ArrayList<Integer> inferenceResults [駒の位置，動かす場所]
+     */
+    public ArrayList<Integer> inference(Status status){
+        ArrayList<Integer> inferenceResults = new ArrayList<>();
+        return inferenceResults;
     }
 
     /*
