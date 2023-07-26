@@ -174,12 +174,14 @@ public class Operator {
      * @return ArrayList<Integer> 駒が移動可能な位置のリスト
      */
     public static ArrayList<Integer> availableMove(Board board, int position){
+        //駒が移動できるリストを取得
+        ArrayList<Integer> positionList = new ArrayList<>();
+
         if (position > 24){//持ち駒からの移動の場合
             //駒を取得
             Piece piece = board.getPiece(position);
 
-            //駒が移動できるリストを取得
-            ArrayList<Integer> positionList = new ArrayList<>();
+            
 
             if (piece instanceof Hu){//もし歩なら
                 if (piece.getOwner()){//人間側なら
@@ -207,7 +209,7 @@ public class Operator {
             Piece piece = board.getPiece(position);        
             
             //駒が移動できるリストを取得
-            ArrayList<Integer> positionList = piece.move(board); 
+            positionList = piece.move(board); 
         }
         return positionList;
     }
