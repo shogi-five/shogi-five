@@ -38,6 +38,78 @@ public class OperatorTest {
     }
 
     /*
+     * availableMoveのテスト
+     * 持ち駒から移動可能な位置のリストが取得できれば良い
+     */
+    @Test
+    public void testAvailableMoveMochigomaKin(){
+        //正解データ
+        ArrayList<Integer> kincorrect = new ArrayList<>();
+        for (int i=0;i<25;i++){
+            if (i == 5 || i == 13){
+                continue;
+            }
+            kincorrect.add(i);
+        }
+
+        //何もないboardをつくる
+        Board board = new Board();
+        for (int j = 0; j < 25;j++){
+            board.setPiece(null, j);
+        }
+
+        //邪魔駒を設定
+        board.setPiece(new Hu(13, true), 13);
+        board.setPiece(new Hu(5, true), 5);
+
+
+        //持ち駒を設定
+        int position = 37;
+        board.setPiece(new Kin(position, true), position);
+
+        ArrayList<Integer> ans = Operator.availableMove(board, position);
+
+        //正解と比較
+        assertEquals(kincorrect, ans);
+    }
+
+    /*
+     * availableMoveのテスト
+     * 持ち駒から移動可能な位置のリストが取得できれば良い
+     */
+    @Test
+    public void testAvailableMoveMochigomaHu(){
+        //正解データ
+        ArrayList<Integer> kincorrect = new ArrayList<>();
+        for (int i=5;i<25;i++){
+            if (i == 5 || i == 13){
+                continue;
+            }
+            kincorrect.add(i);
+        }
+
+        //何もないboardをつくる
+        Board board = new Board();
+        for (int j = 0; j < 25;j++){
+            board.setPiece(null, j);
+        }
+
+        //邪魔駒を設定
+        board.setPiece(new Hu(13, true), 13);
+        board.setPiece(new Hu(5, true), 5);
+
+
+        //持ち駒を設定
+        int position = 37;
+        board.setPiece(new Hu(position, true), position);
+
+        ArrayList<Integer> ans = Operator.availableMove(board, position);
+
+        //正解と比較
+        assertEquals(kincorrect, ans);
+    }
+
+    /*
      * 駒の所有権が移らない駒の移動のテスト
      */
     @Test

@@ -1,7 +1,7 @@
 package shogi_five.model;
 
 import shogi_five.model.Board;
-import shogi_five.model.piece.Piece;
+import shogi_five.model.piece.*;
 import shogi_five.model.Chooseable;
 import shogi_five.model.Status;
 
@@ -174,11 +174,43 @@ public class Operator {
      * @return ArrayList<Integer> 駒が移動可能な位置のリスト
      */
     public static ArrayList<Integer> availableMove(Board board, int position){
-        //駒を取得
-        Piece piece = board.getPiece(position);        
         //駒が移動できるリストを取得
-        ArrayList<Integer> positionList = piece.move(board);
+        ArrayList<Integer> positionList = new ArrayList<>();
 
+        if (position > 24){//持ち駒からの移動の場合
+            //駒を取得
+            Piece piece = board.getPiece(position);
+
+            
+
+            if (piece instanceof Hu){//もし歩なら
+                if (piece.getOwner()){//人間側なら
+                    for(int i=5;i<25;i++){
+                        if (board.getPiece(i) == null){
+                            positionList.add(i);
+                        }
+                    }
+                }else{
+                    for(int i=0;i<20;i++){
+                        if (board.getPiece(i) == null){
+                            positionList.add(i);
+                        }
+                    }
+                }
+            }else{
+                for (int i=0; i<25 ; i++){
+                    if (board.getPiece(i) == null){
+                        positionList.add(i);
+                    }
+                }
+            }
+        }else{
+            //駒を取得
+            Piece piece = board.getPiece(position);        
+            
+            //駒が移動できるリストを取得
+            positionList = piece.move(board); 
+        }
         return positionList;
     }
 }

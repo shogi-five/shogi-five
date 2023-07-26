@@ -11,7 +11,7 @@ import org.junit.Test;
 import shogi_five.model.Board;
 
 /*
- * 歩の単体テスト
+ * 銀の単体テスト
  */
 public class GinTest {
     /*
