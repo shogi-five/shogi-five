@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import shogi_five.model.*;
 
 /*
- * 飛車の駒
+ * 角の駒
  */
 
 public class Kaku extends Piece{
