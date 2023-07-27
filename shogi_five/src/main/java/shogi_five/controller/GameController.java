@@ -47,7 +47,7 @@ public class GameController {
 
             this.setView();//更新を反映
 
-            if (this.checkVictory()){//勝利判定
+            if (this.checkVictory(true)){//勝利判定
                 break;
             }
 
@@ -59,7 +59,7 @@ public class GameController {
 
             this.setView();//更新を反映
 
-            if (this.checkVictory()){//勝利判定
+            if (this.checkVictory(false)){//勝利判定
                 break;
             }
             
@@ -95,8 +95,11 @@ public class GameController {
 
     /*
      * 駒を選択
+     * @return int 移動させたい駒の位置
      */
-    public int getSelectPiece(){}
+    public int getSelectPiece(){
+        return this.view.getMovePice();
+    }
 
     /*
      * 盤面に移動可能な範囲を表示
@@ -105,8 +108,11 @@ public class GameController {
 
     /*
      * 移動させる場所を取得
+     * @return int 駒の移動先
      */
-    public int getSelectPosition(){}
+    public int getSelectPosition(){
+        return this.view.getMovePosition();
+    }
 
     /*
      * 現在移動可能なリストを取得
@@ -133,9 +139,36 @@ public class GameController {
     }
 
     /*
-     * 勝敗の判定
+     * 勝利判定
+     * 王が二つ含まれていたら勝利とする．
+     * @parame boolean owner trueならHuman，FalseならAIについて勝利判定を行う
+     * @return boolean 勝利していたらtrue
      */
-    public boolean checkVictory(){}
+    public boolean checkVictory(boolean owner){
+        boolean checkVictory = false;
+
+        ArrayList<Piece> pieces = new ArrayList<>();
+
+        if (owner){
+            pieces = this.status.getHuman().getHavePiece();//Humanの駒のリストを取得
+        }else{
+            pieces = this.status.getHuman().getHavePiece();//AIの駒のリストを取得
+        }
+
+        int OuCounter = 0;//王の個数を数える
+
+        for(Piece piece:pieces){
+            if(piece instanceof Ou){
+                OuCounter++;
+            }
+        }
+
+        if (OuCounter >= 2){
+            checkVictory = true;
+        }
+
+        return checkVictory;
+    }
 
     /*
      * Statusの更新
