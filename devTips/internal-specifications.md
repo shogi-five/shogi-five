@@ -176,3 +176,34 @@ C : GameControler
 ## AI extend Player
 ### 説明
 AIプレイヤーを表す。
+
+### フィールド
+- ArrayList<Piece> havePiece：所有している駒のリスト
+
+### メソッド
+- Status inference(Status status)：現在のstatusから次の盤面を予測
+
+---
+
+## Node
+### 説明
+探索木のノードを表す
+
+### フィールド
+- Status status：盤面の状況を表す
+- int evaluatin：盤面の評価を表す
+- int parent：親ノードの配列番号を表す
+- int child：子ノードの数
+
+---
+
+## Tree
+### 説明
+探索木を表し，AIの予測に使用する．
+
+### フィールド
+- ArrayList<Node> node：探索木を表す
+
+### メソッド
+- Node miniMax(ArrayList<Node>, int depth)：minimax法で探索を行い，最良のNodeを返す．
+
