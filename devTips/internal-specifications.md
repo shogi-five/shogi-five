@@ -66,24 +66,23 @@ C : GameControler
 ゲームのコントロールをする。
 
 ### フィールド
-- View gameView：盤面を表示
-- Bord bord：盤面
 - Operator operator：盤面を遷移させる
-- Player[] playerlist：プレイヤーのリスト
-- Bord[] bordLog：過去の盤面
+- Status status：盤面や駒の所有などを表す
+- View view：盤面を表示する
+- ArrayList<Status> previousBoard：過去の盤面
 
 ### メソッド
 - void game()：ゲームのループ
 - void init()：盤面の初期化
 - void setView(Bord：盤面)： 盤面の表示
-- void setChooseableView()：Chooseable[]をViewにセット
-- Chooseable[] getChooseableList()：選択された駒が移動可能なリストをゲット
+- int getSelectPiece()：選択された駒の番号を取得
+- void setAvailableMoveView()：移動可能な範囲を表示
+- int getSelectPosition()：選択された駒の移動先を取得
 - int getChooseablePosition()：駒の移動先の位置を取得
-- Bord getNextBord(Bord：盤面, Piece：駒, int：位置)：次の盤面の生成
 - void checkVictory()：勝敗の判定
-- void changePlayer()：指し手の交代
-- void set(Piece)：所有している駒をセット
-- void getPlayer(Piece)：所有している駒をゲット
+- Status getNextHumanStatus()：人間の手から次の状態を取得
+- Status getNextAIStatus()：AIの手から次の状態を取得
+- updateStaus(Stattus)：Statusの更新
 
 ---
 
@@ -177,3 +176,34 @@ C : GameControler
 ## AI extend Player
 ### 説明
 AIプレイヤーを表す。
+
+### フィールド
+- ArrayList<Piece> havePiece：所有している駒のリスト
+
+### メソッド
+- Status inference(Status status)：現在のstatusから次の盤面を予測
+
+---
+
+## Node
+### 説明
+探索木のノードを表す
+
+### フィールド
+- Status status：盤面の状況を表す
+- int evaluatin：盤面の評価を表す
+- int parent：親ノードの配列番号を表す
+- int child：子ノードの数
+
+---
+
+## Tree
+### 説明
+探索木を表し，AIの予測に使用する．
+
+### フィールド
+- ArrayList<Node> node：探索木を表す
+
+### メソッド
+- Node miniMax(ArrayList<Node>, int depth)：minimax法で探索を行い，最良のNodeを返す．
+
