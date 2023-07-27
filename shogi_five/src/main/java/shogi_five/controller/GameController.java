@@ -33,15 +33,15 @@ public class GameController {
         do{
             //***人間の操作
 
-            int selectPiece = this.getSelectPiece();//駒を選択
+            int selectPiece = getSelectPiece();//駒を選択
 
             ArrayList<Integer> moveList = this.operator.availableMove(this.status.getBoard(), selectPiece);//移動できる範囲
 
-            this.setAvailableMoveView(moveList);//移動可能範囲を表示
+            setAvailableMoveView(moveList);//移動可能範囲を表示
 
-            int selectPosition = this.getSelectPosition();//移動させる場所を取得
+            int selectPosition = getSelectPosition();//移動させる場所を取得
 
-            Status nextStatus = this.operator.operator(this.status, selectPiece, selectPosition);//盤面を変更
+            Status nextStatus = getNextHumanStatus(selectPiece, selectPosition);//盤面を変更
 
             this.updateStatus(nextStatus);//Statusの更新
 
@@ -53,7 +53,7 @@ public class GameController {
 
             //*** AIの操作
 
-            Status AINextStatus = this.status.getAI().inference(this.status);//AIの探索
+            Status AINextStatus = getNextAIStatus();//AIの探索
 
             this.updateStatus(AINextStatus);//Statusの更新
 
@@ -119,29 +119,23 @@ public class GameController {
     public void setChooseableList(){}
 
     /*
-     * 次の盤面の生成
+     * 人間の手から次の盤面の生成
      */
-    public Board getNextBoard(){}
+    public Status getNextHumanStatus(int selectPiece, int selectPosition){
+        return this.operator.operator(this.status, selectPiece, selectPosition);
+    }
+
+    /*
+     * AIの手から次の盤面の生成
+     */
+    public Status getNextAIStatus(){
+        return this.status.getAI().inference(this.status);
+    }
 
     /*
      * 勝敗の判定
      */
     public boolean checkVictory(){}
-
-    /*
-     * 指し手の交代
-     */
-    public void changePlayer(){}
-
-    /*
-     * プレイヤーの所有している駒をセット
-     */
-    public void setHavePice(Piece pice){}
-
-    /*
-     * プレイヤーの所有している駒をゲット
-     */
-    public Piece getHavePice(){}
 
     /*
      * Statusの更新
