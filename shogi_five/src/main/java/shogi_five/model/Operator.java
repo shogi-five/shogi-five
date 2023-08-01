@@ -213,4 +213,8 @@ public class Operator {
         }
         return positionList;
     }
+
+    public static int calEval(Status status){
+        return 0;
+    }
 }

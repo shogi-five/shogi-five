@@ -21,4 +21,5 @@ public abstract class Piece {
     public abstract boolean getOwner();
     public abstract int getPieceClass();
     public abstract boolean getPromote();
+    public abstract int getPosition();
 }

@@ -33,33 +33,33 @@ public class GameController {
         do{
             //***人間の操作
 
-            int selectPiece = this.getSelectPiece();//駒を選択
+            int selectPiece = getSelectPiece();//駒を選択
 
             ArrayList<Integer> moveList = this.operator.availableMove(this.status.getBoard(), selectPiece);//移動できる範囲
 
-            this.setAvailableMoveView(moveList);//移動可能範囲を表示
+            setAvailableMoveView(moveList);//移動可能範囲を表示
 
-            int selectPosition = this.getSelectPosition();//移動させる場所を取得
+            int selectPosition = getSelectPosition();//移動させる場所を取得
 
-            Status nextStatus = this.operator.operator(this.status, selectPiece, selectPosition);//盤面を変更
+            Status nextStatus = getNextHumanStatus(selectPiece, selectPosition);//盤面を変更
 
             this.updateStatus(nextStatus);//Statusの更新
 
             this.setView();//更新を反映
 
-            if (this.checkVictory()){//勝利判定
+            if (this.checkVictory(true)){//勝利判定
                 break;
             }
 
             //*** AIの操作
 
-            Status AINextStatus = this.status.getAI().inference(this.status);//AIの探索
+            Status AINextStatus = getNextAIStatus();//AIの探索
 
             this.updateStatus(AINextStatus);//Statusの更新
 
             this.setView();//更新を反映
 
-            if (this.checkVictory()){//勝利判定
+            if (this.checkVictory(false)){//勝利判定
                 break;
             }
             
@@ -95,8 +95,11 @@ public class GameController {
 
     /*
      * 駒を選択
+     * @return int 移動させたい駒の位置
      */
-    public int getSelectPiece(){}
+    public int getSelectPiece(){
+        return this.view.getMovePice();
+    }
 
     /*
      * 盤面に移動可能な範囲を表示
@@ -105,8 +108,11 @@ public class GameController {
 
     /*
      * 移動させる場所を取得
+     * @return int 駒の移動先
      */
-    public int getSelectPosition(){}
+    public int getSelectPosition(){
+        return this.view.getMovePosition();
+    }
 
     /*
      * 現在移動可能なリストを取得
@@ -119,29 +125,50 @@ public class GameController {
     public void setChooseableList(){}
 
     /*
-     * 次の盤面の生成
+     * 人間の手から次の盤面の生成
      */
-    public Board getNextBoard(){}
+    public Status getNextHumanStatus(int selectPiece, int selectPosition){
+        return this.operator.operator(this.status, selectPiece, selectPosition);
+    }
 
     /*
-     * 勝敗の判定
+     * AIの手から次の盤面の生成
      */
-    public boolean checkVictory(){}
+    public Status getNextAIStatus(){
+        return this.status.getAI().inference(this.status);
+    }
 
     /*
-     * 指し手の交代
+     * 勝利判定
+     * 王が二つ含まれていたら勝利とする．
+     * @parame boolean owner trueならHuman，FalseならAIについて勝利判定を行う
+     * @return boolean 勝利していたらtrue
      */
-    public void changePlayer(){}
+    public boolean checkVictory(boolean owner){
+        boolean checkVictory = false;
 
-    /*
-     * プレイヤーの所有している駒をセット
-     */
-    public void setHavePice(Piece pice){}
+        ArrayList<Piece> pieces = new ArrayList<>();
 
-    /*
-     * プレイヤーの所有している駒をゲット
-     */
-    public Piece getHavePice(){}
+        if (owner){
+            pieces = this.status.getHuman().getHavePiece();//Humanの駒のリストを取得
+        }else{
+            pieces = this.status.getHuman().getHavePiece();//AIの駒のリストを取得
+        }
+
+        int OuCounter = 0;//王の個数を数える
+
+        for(Piece piece:pieces){
+            if(piece instanceof Ou){
+                OuCounter++;
+            }
+        }
+
+        if (OuCounter >= 2){
+            checkVictory = true;
+        }
+
+        return checkVictory;
+    }
 
     /*
      * Statusの更新
