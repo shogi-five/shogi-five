@@ -134,7 +134,18 @@ public class Hisha extends Piece{
         return moveList;
     }
 
-
+    /*
+     * ディープコピー
+     */
+    @Override
+    public Hisha clone() throws CloneNotSupportedException{
+        try{
+            Hisha cloned = (Hisha)super.clone();
+            return cloned;
+        }catch (CloneNotSupportedException e){
+            throw new RuntimeException("クローンに失敗しました",e);
+        }
+    }
 
     /*
      * 成りのゲッター
@@ -142,6 +153,7 @@ public class Hisha extends Piece{
     public boolean getPromote(){
         return this.promote;
     }
+    
 
     /*
      * 成りのセッター
@@ -162,6 +174,7 @@ public class Hisha extends Piece{
         }
         this.promote = promote;
     }
+
 
     /*
      * 位置のセッター
