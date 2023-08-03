@@ -214,7 +214,153 @@ public class Operator {
         return positionList;
     }
 
+    /*
+     * Statusの評価値を返す
+     */
     public static int calEval(Status status){
-        return 0;
+        return h1(status);
     }
+
+    /*
+     * 駒の数で評価を行う。
+     * AIが多く所有する方が高く評価する
+     * @return 評価値
+     */
+    public static int h1(Status status){
+        int humanSumOfPieces = status.getHuman().getHavePiece().size();//人間の所有している駒の個数の合計
+        int aiSumOfPieces = status.getAI().getHavePiece().size();//AIの所有している駒の個数の合計
+
+        return aiSumOfPieces - humanSumOfPieces;//AIの個数 - 人間の個数
+    }
+
+    /*
+     * 駒が前に進むほど高く評価する
+     * @return 評価値
+     */
+    public static int h2(Status status){
+        ArrayList<Piece> aiHavePieces = status.getAI().getHavePiece();//AIの所有している駒のリスト
+
+        int aiSumOfPiecesPosition = 0;
+        for(Piece piece:aiHavePieces){
+            aiSumOfPiecesPosition += piece.getPosition();
+        }
+
+        return aiSumOfPiecesPosition;
+    }
+
+    /*
+     * 駒の成りを評価する
+     * AIが所有している駒の内
+     * 成の駒を1、そうでない駒を0として評価
+     * @return 評価値
+     */
+    public static int h3(Status status){
+        ArrayList<Piece> aiHavePieces = status.getAI().getHavePiece();//AIの所有している駒のリスト
+
+        int aiSumOfPiecesPromote = 0;
+        for(Piece piece:aiHavePieces){
+            if (piece.getPromote()){
+                aiSumOfPiecesPromote++;
+            }
+        }
+
+        return aiSumOfPiecesPromote;
+    }
+
+    /*
+     * 王の動きに着目
+     * AIの王の動きを大きく、人間の王の動きを小さくする
+     * @return 評価値
+     */
+    public static int h4(Status status){
+        ArrayList<Piece> aiHavePieces = status.getAI().getHavePiece();//AIの所有している駒のリスト
+
+        int aiOuMoveNum=0;//AIの王が動ける場所の数
+        for(Piece piece:aiHavePieces){
+            if (piece instanceof Ou){//王なら                
+                aiOuMoveNum = availableMove(status.getBoard(), piece.getPosition()).size();//AIの王が動ける場所の数
+                break;
+            }
+        }
+
+        ArrayList<Piece> humanHavePieces = status.getHuman().getHavePiece();//人間の所有している駒のリスト
+
+        int humanOuMoveNum=0;//人間の王が動ける場所の数
+        for(Piece piece:humanHavePieces){
+            if (piece instanceof Ou){//王なら
+                humanOuMoveNum = availableMove(status.getBoard(), piece.getPosition()).size();//人間の王が動ける場所の数
+                break;
+            }
+        }
+
+        return aiOuMoveNum - humanOuMoveNum;
+    }
+
+    /*
+     * 各駒に評価値をつける
+     * AIの所有している駒の評価値の合計-人間の所有している駒の評価値の合計
+     * 王＝無限大(1000000)
+     * 歩＝1
+     * 金＝15
+     * 銀＝5
+     * 飛＝20
+     * 角＝10
+     * 龍王＝40
+     * 龍馬＝30
+     * @return 評価値
+     */
+    public static int h5(Status status){
+        ArrayList<Piece> aiHavePieces = status.getAI().getHavePiece();//AIの所有している駒のリスト
+
+        int aiHavePiecesValue=0;//AIの所有している駒の評価値の合計
+        for(Piece piece:aiHavePieces){
+            int pieceClass = piece.getPieceClass();
+            if (pieceClass%10 == 1){//王なら
+                aiHavePiecesValue += 1000000;
+            }else if(pieceClass%10 == 2){//飛車
+                aiHavePiecesValue += 20;
+            }else if(pieceClass%10 == 3){//角
+                aiHavePiecesValue += 10;
+            }else if(pieceClass%10 == 4 || pieceClass%10 == 9 || pieceClass%10 == 0){//金、成銀、と金
+                aiHavePiecesValue += 15;
+            }else if(pieceClass%10 == 5){//銀
+                aiHavePiecesValue += 5;
+            }else if(pieceClass%10 == 6){//歩
+                aiHavePiecesValue += 1;
+            }else if(pieceClass%10 == 7){//龍王
+                aiHavePiecesValue += 40;
+            }else if(pieceClass%10 == 8){//龍馬
+                aiHavePiecesValue += 30;
+            }
+            System.out.println("piece name:" + pieceClass + ", value:"+aiHavePiecesValue);
+        }
+
+        ArrayList<Piece> humanHavePieces = status.getHuman().getHavePiece();//人間の所有している駒のリスト
+
+        int humanHavePiecesValue=0;//人間の所有している駒の評価値の合計
+        for(Piece piece:humanHavePieces){
+            int pieceClass = piece.getPieceClass();
+            if (pieceClass%10 == 1){//王なら
+                humanHavePiecesValue += 1000000;
+            }else if(pieceClass%10 == 2){//飛車
+                humanHavePiecesValue += 20;
+            }else if(pieceClass%10 == 3){//角
+                humanHavePiecesValue += 10;
+            }else if(pieceClass%10 == 4 || pieceClass%10 == 9 || pieceClass%10 == 0){//金、成銀、と金
+                humanHavePiecesValue += 15;
+            }else if(pieceClass%10 == 5){//銀
+                humanHavePiecesValue += 5;
+            }else if(pieceClass%10 == 6){//歩
+                humanHavePiecesValue += 1;
+            }else if(pieceClass%10 == 7){//龍王
+                humanHavePiecesValue += 40;
+            }else if(pieceClass%10 == 8){//龍馬
+                humanHavePiecesValue += 30;
+            }            
+        }
+
+        System.out.println("ai:"+aiHavePiecesValue + ",human:" + humanHavePiecesValue);
+
+        return aiHavePiecesValue - humanHavePiecesValue;
+    } 
 }
