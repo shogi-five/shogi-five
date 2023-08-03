@@ -205,8 +205,23 @@ public class Kaku extends Piece{
      * 成りのセッター
      */
     public void setPromote(boolean promote){
+        if (promote){//成り
+            if (this.owner){
+                setPieceClass(8);
+            }else{
+                setPieceClass(18);
+            }
+        }else{
+            if (this.owner){
+                setPieceClass(3);
+            }else{
+                setPieceClass(13);
+            }
+        }
         this.promote = promote;
     }
+
+
 
     /*
      * 位置のセッター
