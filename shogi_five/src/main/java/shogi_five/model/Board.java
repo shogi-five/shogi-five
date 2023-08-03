@@ -60,6 +60,7 @@ public class Board implements Cloneable{
     /*
      * ディープコピー
      */
+    @Override
     public Board clone() throws CloneNotSupportedException{
         try{
             Board cloned = (Board)super.clone();

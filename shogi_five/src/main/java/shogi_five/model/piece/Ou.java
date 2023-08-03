@@ -95,6 +95,19 @@ public class Ou extends Piece{
     }
 
     /*
+     * ディープコピー
+     */
+    @Override
+    public Ou clone() throws CloneNotSupportedException{
+        try{
+            Ou cloned = (Ou)super.clone();
+            return cloned;
+        }catch (CloneNotSupportedException e){
+            throw new RuntimeException("クローンに失敗しました",e);
+        }
+    }
+
+    /*
      * 成りのゲッター
      */
     public boolean getPromote(){

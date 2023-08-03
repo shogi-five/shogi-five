@@ -25,6 +25,7 @@ public class Human extends Player{
     /*
      * ディープコピー
      */
+    @Override
     public Human clone() throws CloneNotSupportedException{
         try{
             Human cloned = (Human)super.clone();

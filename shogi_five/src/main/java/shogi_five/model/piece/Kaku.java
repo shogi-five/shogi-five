@@ -181,6 +181,18 @@ public class Kaku extends Piece{
     return moveList;
 }
 
+    /*
+     * ディープコピー
+     */
+    @Override
+    public Kaku clone() throws CloneNotSupportedException{
+        try{
+            Kaku cloned = (Kaku)super.clone();
+            return cloned;
+        }catch (CloneNotSupportedException e){
+            throw new RuntimeException("クローンに失敗しました",e);
+        }
+    }
 
     /*
      * 成りのゲッター

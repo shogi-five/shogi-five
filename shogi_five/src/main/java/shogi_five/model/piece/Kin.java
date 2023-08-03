@@ -131,6 +131,18 @@ public class Kin extends Piece{
         return moveList;
     }
 
+    /*
+     * ディープコピー
+     */
+    @Override
+    public Kin clone() throws CloneNotSupportedException{
+        try{
+            Kin cloned = (Kin)super.clone();
+            return cloned;
+        }catch (CloneNotSupportedException e){
+            throw new RuntimeException("クローンに失敗しました",e);
+        }
+    }
 
     /*
      * 成りのゲッター

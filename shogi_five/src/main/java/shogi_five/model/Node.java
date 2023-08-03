@@ -2,7 +2,7 @@ package shogi_five.model;
 
 import shogi_five.model.Status;
 
-public class Node{
+public class Node implements Cloneable{
     private Status status;
     private int evaluation;
     private int parent;
@@ -20,7 +20,11 @@ public class Node{
     /*
      * デフォルトコンストラクタ
      */
-    public Node(){}
+    public Node(){
+        this.status=null;
+        this.parent=0;
+        this.child=0;
+    }
 
     /*
      * statuのゲッター
@@ -68,6 +72,7 @@ public class Node{
     /*
      * ディープコピー
      */
+    @Override
     public Node clone() throws CloneNotSupportedException{
         try{
             Node cloned = (Node)super.clone();

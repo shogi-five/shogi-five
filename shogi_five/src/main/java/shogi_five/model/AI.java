@@ -28,6 +28,7 @@ public class AI extends Player{
     /*
      * ディープコピー
      */
+    @Override
     public AI clone() throws CloneNotSupportedException{
         try{
             AI cloned = (AI)super.clone();
