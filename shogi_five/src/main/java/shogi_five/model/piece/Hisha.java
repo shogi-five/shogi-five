@@ -67,11 +67,11 @@ public class Hisha extends Piece{
         //横の動き
             //右方向(プラス方向)への移動
             for (int i = 0; i < 4 - (this.position % 5); i++){
-                if ((board.getPiece(this.position + (i + 1)) != null) && (board.getPiece(this.position - (i + 1)).getOwner() == this.owner)){
+                if ((board.getPiece(this.position + (i + 1)) != null) && (board.getPiece(this.position + (i + 1)).getOwner() == this.owner)){
                     break;
                 }
                 //移動先に相手の駒があるとき,移動先を追加してfor文から抜ける
-                 if ((board.getPiece(this.position + (i + 1)) != null) && (board.getPiece(this.position - (i + 1)).getOwner() != this.owner)){
+                 if ((board.getPiece(this.position + (i + 1)) != null) && (board.getPiece(this.position + (i + 1)).getOwner() != this.owner)){
                     moveList.add(this.position + (i + 1));
                     break;
                 }
