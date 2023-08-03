@@ -20,7 +20,11 @@ public class Node{
     /*
      * デフォルトコンストラクタ
      */
-    public Node(){}
+    public Node(){
+        this.status=null;
+        this.parent=0;
+        this.child=0;
+    }
 
     /*
      * statuのゲッター
