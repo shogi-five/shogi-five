@@ -5,7 +5,7 @@ import shogi_five.model.Player;
 
 import java.util.ArrayList;
 
-public class Status {
+public class Status implements Cloneable{
     Board board;
     Human human;
     AI ai;
@@ -17,6 +17,14 @@ public class Status {
         this.board = board;
         this.human = human;
         this.ai = ai;
+    }
+
+    /*
+     * ディープコピー
+     */
+    public Status clone() throws CloneNotSupportedException{
+        Status clone = (Status)super.clone();
+        return clone;
     }
 
     public Board getBoard(){
