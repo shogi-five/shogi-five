@@ -23,7 +23,7 @@ public class Status implements Cloneable{
      * ディープコピー
      */
     @Override
-    public Status clone() throws CloneNotSupportedException{
+    public Status clone(){
         try{
             Status cloned = (Status)super.clone();
             cloned.board = this.board.clone();

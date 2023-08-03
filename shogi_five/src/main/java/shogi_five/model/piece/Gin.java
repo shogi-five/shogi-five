@@ -109,13 +109,13 @@ public class Gin extends Piece{
      * ディープコピー
      */
     @Override
-    public Gin clone() throws CloneNotSupportedException{
-        try{
-            Gin cloned = (Gin)super.clone();
-            return cloned;
-        }catch (CloneNotSupportedException e){
-            throw new RuntimeException("クローンに失敗しました",e);
-        }
+    public Gin clone(){
+        Gin cloned = (Gin)super.clone();
+        cloned.position = position;
+        cloned.owner = owner;
+        cloned.pieceClass = pieceClass;
+        cloned.promote = promote;
+        return cloned;
     }
 
     /*

@@ -138,13 +138,13 @@ public class Hisha extends Piece{
      * ディープコピー
      */
     @Override
-    public Hisha clone() throws CloneNotSupportedException{
-        try{
-            Hisha cloned = (Hisha)super.clone();
-            return cloned;
-        }catch (CloneNotSupportedException e){
-            throw new RuntimeException("クローンに失敗しました",e);
-        }
+    public Hisha clone(){
+        Hisha cloned = (Hisha)super.clone();
+        cloned.position = position;
+        cloned.owner = owner;
+        cloned.pieceClass = pieceClass;
+        cloned.promote = promote;
+        return cloned;
     }
 
     /*
