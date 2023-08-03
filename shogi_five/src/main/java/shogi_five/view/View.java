@@ -46,36 +46,17 @@ public class View {
         this.frame.repaint();
     }
 
-    /*
-     * 選択した駒の位置を取得
-     */
-    public Piece getMovePice(){
-        if (this.src == null || this.board == null) {
-            return null;
-        }
-        return this.board.getPiece(this.src.getPosition());
-    }
 
-    /*
-     * 選択した駒の移動先を取得
-     */
-    public Piece getMovePosition(){
-        if (this.src == null || this.board == null) {
-            return null;
-        }
-
-        Piece p = PieceKind.into(this.src);
-        p.setPosition(this.des.getPosition());
-        return p;
-    }
 
     public Cursor getCursor() {
         return this.cursor;
     }
 
     public void cursorEvent(Box src, Box des) {
-        this.src = src;
-        this.des = des;
+        if (src.isDownward()) {
+            return;
+        }
+        this.gameController.putPieceEvent(src.getPosition(), des.getPosition());
         
     }
 

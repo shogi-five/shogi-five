@@ -11,6 +11,8 @@ public class GameController {
     private Status status;
     private View view;
     private ArrayList<Status> previousBoard;
+    private boolean isHumanturn;
+    
 
 
     /**
@@ -18,9 +20,10 @@ public class GameController {
      */
     public GameController() {
         this.status = new Status(new Board(), new Human(null,null), new AI(null, null));
-        this.view = new View();
+        this.view = new View(this);
         this.operator = new Operator();
         this.previousBoard = new ArrayList<Status>();
+        this.isHumanturn = true;
     }
 
     /*
@@ -30,40 +33,17 @@ public class GameController {
         this.init();//初期化
         this.setView();//盤面を表示
 
-        do{
-            //***人間の操作
+        
 
-            int selectPiece = getSelectPiece();//駒を選択
-
-            ArrayList<Integer> moveList = this.operator.availableMove(this.status.getBoard(), selectPiece);//移動できる範囲
-
-            setAvailableMoveView(moveList);//移動可能範囲を表示
-
-            int selectPosition = getSelectPosition();//移動させる場所を取得
-
-            Status nextStatus = getNextHumanStatus(selectPiece, selectPosition);//盤面を変更
-
-            this.updateStatus(nextStatus);//Statusの更新
-
-            this.setView();//更新を反映
-
-            if (this.checkVictory(true)){//勝利判定
-                break;
+        while (!this.checkVictory(false) && ! this.checkVictory(true)) {
+            if (this.isHumanturn) {
+                continue;
             }
-
-            //*** AIの操作
-
             Status AINextStatus = getNextAIStatus();//AIの探索
-
             this.updateStatus(AINextStatus);//Statusの更新
-
             this.setView();//更新を反映
-
-            if (this.checkVictory(false)){//勝利判定
-                break;
-            }
-            
-        }while(true);
+        }
+        
 
     }
 
@@ -93,26 +73,13 @@ public class GameController {
      */
     public void setView(){}
 
-    /*
-     * 駒を選択
-     * @return int 移動させたい駒の位置
-     */
-    public int getSelectPiece(){
-        return this.view.getMovePice();
-    }
 
     /*
      * 盤面に移動可能な範囲を表示
      */
     public void setAvailableMoveView(ArrayList<Integer> moveList){}
 
-    /*
-     * 移動させる場所を取得
-     * @return int 駒の移動先
-     */
-    public int getSelectPosition(){
-        return this.view.getMovePosition();
-    }
+
 
     /*
      * 現在移動可能なリストを取得
@@ -176,6 +143,40 @@ public class GameController {
     public void updateStatus(Status nextStatus){
         this.previousBoard.add(this.status);
         this.status = nextStatus;
+    }
+
+    /**
+     * 割り込み
+     * @param src
+     * @param des
+     * @return おけるかどうか
+     */
+    public boolean putPieceEvent(int src, int des) {
+
+        if (!this.isHumanturn) {
+            return false;
+        }
+
+        ArrayList<Integer> moveList = this.operator.availableMove(this.status.getBoard(), src);//移動できる範囲
+        
+        // 移動可能かどうか判定
+        boolean isContain = false;
+
+        for (int d: moveList) {
+            isContain = isContain | (d==des);
+        }
+        
+        // 移動できなかった.
+        if (!isContain) {
+            return false;
+        }
+
+        Status nextStatus = getNextHumanStatus(src, des);//盤面を変更
+        this.updateStatus(nextStatus);//Statusの更新
+
+        this.view.printBoard(this.status.getBoard());   
+        this.isHumanturn = false;
+        return true;
     }
 
 }
