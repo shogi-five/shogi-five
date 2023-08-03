@@ -18,6 +18,11 @@ public class Node{
     }
 
     /*
+     * デフォルトコンストラクタ
+     */
+    public Node(){}
+
+    /*
      * statuのゲッター
      */
     public Status getStatus(){
