@@ -17,14 +17,9 @@ public class Gin extends Piece{
      * コンストラクタ
      */
     public Gin(int position, boolean owner){
-        if (owner){
-            setPieceClass(5);
-        }else{
-            setPieceClass(15);
-        }
-        this.position = position;
-        this.promote = false;
-        this.owner = owner;
+        setPosition(position);
+        setOwner(owner);
+        setPromote(false);
     }
 
     /*
@@ -122,7 +117,19 @@ public class Gin extends Piece{
      * 成りのセッター
      */
     public void setPromote(boolean promote){
-        this.promote = promote;
+        if (promote){//成り
+            if (this.owner){
+                setPieceClass(9);
+            }else{
+                setPieceClass(19);
+            }
+        }else{
+            if (this.owner){
+                setPieceClass(5);
+            }else{
+                setPieceClass(15);
+            }
+        }        
     }
 
     /*
