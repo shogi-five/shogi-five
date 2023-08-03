@@ -4,7 +4,13 @@ package shogi_five.view;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-import shogi_five.model.piece.*;
+import shogi_five.model.piece.Piece;
+import shogi_five.model.piece.Ou;
+import shogi_five.model.piece.Gin;
+import shogi_five.model.piece.Hisha;
+import shogi_five.model.piece.Hu;
+import shogi_five.model.piece.Kaku;
+import shogi_five.model.piece.Kin;
 
 enum PieceKind {
     EMPTY       (null),
@@ -78,7 +84,7 @@ enum PieceKind {
 
     }
 
-    public PieceKind from(Piece piece) {
+    public static PieceKind from(Piece piece) {
         if (piece instanceof Gin && !piece.getPromote()) {
             return PieceKind.GIN;
         }
@@ -108,7 +114,7 @@ enum PieceKind {
         }
 
         if (piece instanceof Kin) {
-            return PieceKind.Kin;
+            return PieceKind.KIN;
         }
         if (piece instanceof Ou && !piece.getPromote()) {
             return PieceKind.OU;
@@ -121,7 +127,7 @@ enum PieceKind {
 
     }
 
-    public Piece into(Box box) {
+    public static Piece into(Box box) {
         if (box == null) {
             return null;
         }
