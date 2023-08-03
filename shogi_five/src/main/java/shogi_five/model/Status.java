@@ -22,6 +22,7 @@ public class Status implements Cloneable{
     /*
      * ディープコピー
      */
+    @Override
     public Status clone() throws CloneNotSupportedException{
         try{
             Status cloned = (Status)super.clone();
