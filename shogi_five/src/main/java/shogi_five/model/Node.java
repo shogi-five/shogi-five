@@ -59,4 +59,10 @@ public class Node{
         this.child = child;
     }
 
+
+    //Nodeのディープコピー 
+    public Node NodeClone(Node node){
+        return new Node(node.status,node.parent,node.child);
+    } 
+
 }
