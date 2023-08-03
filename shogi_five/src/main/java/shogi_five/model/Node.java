@@ -66,6 +66,7 @@ public class Node{
     public Node clone() throws CloneNotSupportedException{
         try{
             Node cloned = (Node)super.clone();
+            cloned.status = this.status.clone();
             return cloned;
         }catch (CloneNotSupportedException e){
             throw new RuntimeException("クローンに失敗しました",e);
