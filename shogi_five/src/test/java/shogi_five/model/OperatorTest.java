@@ -193,5 +193,208 @@ public class OperatorTest {
         assertEquals(next_status.getBoard().getPiece(41).getClass(), kaku.getClass());//角が持ち駒に移動しているか
         assertEquals(correct_ai_piece, next_status.getAI().getHavePiece());//aiの持ち駒リストが変更されているか
         assertEquals(correct_human_piece, next_status.getHuman().getHavePiece());//人間の持ち駒リストが変更されているか
-    }    
+    }
+
+    /*
+     * 評価関数h1についてテスト
+     */
+    @Test
+    public void h1Test(){
+        Board board = new Board();
+        for (int i=0;i<25;i++){//空のBoardを作成
+            board.setPiece(null, i);
+        }
+
+        //配列の用意
+        ArrayList<Piece> humanPieces = new ArrayList<>();
+        ArrayList<Chooseable> humanAvailblePiece = new ArrayList<>();
+        ArrayList<Piece> aiPieces = new ArrayList<>();
+        ArrayList<Chooseable> aiAvailblePiece = new ArrayList<>();
+
+        //ai所有の駒の準備
+        Hu aiHu0 = new Hu(0, false);board.setPiece(aiHu0, 0);aiPieces.add(aiHu0);
+        Kin aiKin1 = new Kin(1, false);board.setPiece(aiKin1, 1);aiPieces.add(aiKin1);
+        Gin aiGin2 = new Gin(2, false);board.setPiece(aiGin2, 2);aiPieces.add(aiGin2);
+        Hisha aiHisha3 = new Hisha(3, false);board.setPiece(aiHisha3, 3);aiPieces.add(aiHisha3);
+
+        //human所有の駒の準備
+        Hu huHu0 = new Hu(20, true);board.setPiece(huHu0, 20);humanPieces.add(huHu0);
+        Gin huGin1 = new Gin(21, true);board.setPiece(huGin1, 21);humanPieces.add(huGin1);
+        Kaku huKaku2 = new Kaku(22, true);board.setPiece(huKaku2, 22);humanPieces.add(huKaku2);
+
+        //Statusの用意
+        Human human = new Human(humanPieces, humanAvailblePiece);
+        AI ai = new AI(aiPieces, aiAvailblePiece);
+        Status status = new Status(board, human, ai);
+
+        //Statusの評価値を計算
+        int evaluation = Operator.h1(status);
+
+        //正解と比較
+        assertEquals(1, evaluation);
+    }
+
+    /*
+     * 評価関数h2についてテスト
+     */
+    @Test
+    public void h2Test(){
+        Board board = new Board();
+        for (int i=0;i<25;i++){//空のBoardを作成
+            board.setPiece(null, i);
+        }
+
+        //配列の用意
+        ArrayList<Piece> humanPieces = new ArrayList<>();
+        ArrayList<Chooseable> humanAvailblePiece = new ArrayList<>();
+        ArrayList<Piece> aiPieces = new ArrayList<>();
+        ArrayList<Chooseable> aiAvailblePiece = new ArrayList<>();
+
+        //ai所有の駒の準備
+        Hu aiHu0 = new Hu(0, false);board.setPiece(aiHu0, 0);aiPieces.add(aiHu0);
+        Kin aiKin1 = new Kin(1, false);board.setPiece(aiKin1, 1);aiPieces.add(aiKin1);
+        Gin aiGin2 = new Gin(2, false);board.setPiece(aiGin2, 2);aiPieces.add(aiGin2);
+        Hisha aiHisha3 = new Hisha(3, false);board.setPiece(aiHisha3, 3);aiPieces.add(aiHisha3);
+
+        //human所有の駒の準備
+        Hu huHu0 = new Hu(20, true);board.setPiece(huHu0, 20);humanPieces.add(huHu0);
+        Gin huGin1 = new Gin(21, true);board.setPiece(huGin1, 21);humanPieces.add(huGin1);
+        Kaku huKaku2 = new Kaku(22, true);board.setPiece(huKaku2, 22);humanPieces.add(huKaku2);
+
+        //Statusの用意
+        Human human = new Human(humanPieces, humanAvailblePiece);
+        AI ai = new AI(aiPieces, aiAvailblePiece);
+        Status status = new Status(board, human, ai);
+
+        //Statusの評価値を計算
+        int evaluation = Operator.h2(status);
+
+        //正解と比較
+        assertEquals(6, evaluation);
+    }
+    
+    /*
+     * 評価関数h3についてテスト
+     */
+    @Test
+    public void h3Test(){
+        Board board = new Board();
+        for (int i=0;i<25;i++){//空のBoardを作成
+            board.setPiece(null, i);
+        }
+
+        //配列の用意
+        ArrayList<Piece> humanPieces = new ArrayList<>();
+        ArrayList<Chooseable> humanAvailblePiece = new ArrayList<>();
+        ArrayList<Piece> aiPieces = new ArrayList<>();
+        ArrayList<Chooseable> aiAvailblePiece = new ArrayList<>();
+
+        //ai所有の駒の準備
+        Hu aiHu0 = new Hu(0, false);aiHu0.setPromote(true);board.setPiece(aiHu0, 0);aiPieces.add(aiHu0);
+        Kin aiKin1 = new Kin(1, false);board.setPiece(aiKin1, 1);aiPieces.add(aiKin1);
+        Gin aiGin2 = new Gin(2, false);board.setPiece(aiGin2, 2);aiPieces.add(aiGin2);
+        Hisha aiHisha3 = new Hisha(3, false);board.setPiece(aiHisha3, 3);aiPieces.add(aiHisha3);
+
+        //human所有の駒の準備
+        Hu huHu0 = new Hu(20, true);board.setPiece(huHu0, 20);humanPieces.add(huHu0);
+        Gin huGin1 = new Gin(21, true);board.setPiece(huGin1, 21);humanPieces.add(huGin1);
+        Kaku huKaku2 = new Kaku(22, true);board.setPiece(huKaku2, 22);humanPieces.add(huKaku2);
+
+        //Statusの用意
+        Human human = new Human(humanPieces, humanAvailblePiece);
+        AI ai = new AI(aiPieces, aiAvailblePiece);
+        Status status = new Status(board, human, ai);
+
+        //Statusの評価値を計算
+        int evaluation = Operator.h3(status);
+
+        //正解と比較
+        assertEquals(1, evaluation);
+    }
+
+    /*
+     * 評価関数h4についてテスト
+     */
+    @Test
+    public void h4Test(){
+        Board board = new Board();
+        for (int i=0;i<25;i++){//空のBoardを作成
+            board.setPiece(null, i);
+        }
+
+        //配列の用意
+        ArrayList<Piece> humanPieces = new ArrayList<>();
+        ArrayList<Chooseable> humanAvailblePiece = new ArrayList<>();
+        ArrayList<Piece> aiPieces = new ArrayList<>();
+        ArrayList<Chooseable> aiAvailblePiece = new ArrayList<>();
+
+        //ai所有の駒の準備
+        Hu aiHu0 = new Hu(0, false);aiHu0.setPromote(true);board.setPiece(aiHu0, 0);aiPieces.add(aiHu0);
+        Kin aiKin1 = new Kin(1, false);board.setPiece(aiKin1, 1);aiPieces.add(aiKin1);
+        Gin aiGin2 = new Gin(2, false);board.setPiece(aiGin2, 2);aiPieces.add(aiGin2);
+        Hisha aiHisha3 = new Hisha(3, false);board.setPiece(aiHisha3, 3);aiPieces.add(aiHisha3);
+        Ou aiOu4 = new Ou(4, false);board.setPiece(aiOu4, 4);aiPieces.add(aiOu4);
+
+
+        //human所有の駒の準備
+        Hu huHu0 = new Hu(20, true);board.setPiece(huHu0, 20);humanPieces.add(huHu0);
+        Gin huGin1 = new Gin(21, true);board.setPiece(huGin1, 21);humanPieces.add(huGin1);
+        Kaku huKaku2 = new Kaku(22, true);board.setPiece(huKaku2, 22);humanPieces.add(huKaku2);
+        Ou huOu3 = new Ou(23, true);board.setPiece(huOu3, 23);humanPieces.add(huOu3);
+
+
+        //Statusの用意
+        Human human = new Human(humanPieces, humanAvailblePiece);
+        AI ai = new AI(aiPieces, aiAvailblePiece);
+        Status status = new Status(board, human, ai);
+
+        //Statusの評価値を計算
+        int evaluation = Operator.h4(status);
+
+        //正解と比較
+        assertEquals(-2, evaluation);
+    }
+
+    /*
+     * 評価関数h5についてテスト
+     */
+    @Test
+    public void h5Test(){
+        Board board = new Board();
+        for (int i=0;i<25;i++){//空のBoardを作成
+            board.setPiece(null, i);
+        }
+
+        //配列の用意
+        ArrayList<Piece> humanPieces = new ArrayList<>();
+        ArrayList<Chooseable> humanAvailblePiece = new ArrayList<>();
+        ArrayList<Piece> aiPieces = new ArrayList<>();
+        ArrayList<Chooseable> aiAvailblePiece = new ArrayList<>();
+
+        //ai所有の駒の準備
+        Hu aiHu0 = new Hu(0, false);aiHu0.setPromote(true);board.setPiece(aiHu0, 0);aiPieces.add(aiHu0);
+        Kin aiKin1 = new Kin(1, false);board.setPiece(aiKin1, 1);aiPieces.add(aiKin1);
+        Gin aiGin2 = new Gin(2, false);board.setPiece(aiGin2, 2);aiPieces.add(aiGin2);
+        Hisha aiHisha3 = new Hisha(3, false);board.setPiece(aiHisha3, 3);aiPieces.add(aiHisha3);
+        Ou aiOu4 = new Ou(4, false);board.setPiece(aiOu4, 4);aiPieces.add(aiOu4);
+
+
+        //human所有の駒の準備
+        Hu huHu0 = new Hu(20, true);board.setPiece(huHu0, 20);humanPieces.add(huHu0);
+        Gin huGin1 = new Gin(21, true);board.setPiece(huGin1, 21);humanPieces.add(huGin1);
+        Kaku huKaku2 = new Kaku(22, true);board.setPiece(huKaku2, 22);humanPieces.add(huKaku2);
+        Ou huOu3 = new Ou(23, true);board.setPiece(huOu3, 23);humanPieces.add(huOu3);
+
+
+        //Statusの用意
+        Human human = new Human(humanPieces, humanAvailblePiece);
+        AI ai = new AI(aiPieces, aiAvailblePiece);
+        Status status = new Status(board, human, ai);
+
+        //Statusの評価値を計算
+        int evaluation = Operator.h5(status);
+
+        //正解と比較
+        assertEquals(39, evaluation);
+    }
 }
