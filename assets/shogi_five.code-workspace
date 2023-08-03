@@ -1,0 +1,21 @@
+{
+    "folders": [{"path": "."}],
+    "settings": {
+
+        "editor.tabSize": 4,
+        
+        // `python` 設定
+        "python.linting.mypyEnabled": true,
+        
+    },
+    "extensions": {
+        // おすすめ拡張機能
+        "recommendations": [
+            "ms-ceintl.vscode-language-pack-ja", // 日本語化
+            "vscjava.vscode-java-pack",          // java 拡張機能
+            "donjayamanne.githistory",           // git
+            "mhutchie.git-graph",                // git
+            "yzhang.markdown-all-in-one",        // README.md が見やすくなる(ctrl+shift+v)
+        ]
+    }
+}
