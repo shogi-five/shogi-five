@@ -22,6 +22,9 @@ public class Tree{
      * minimax法で探索を行う．決定したNodeを返す．
      */
     public static Node miniMax(Node node,int depth){
+        if(depth % 2 == 0){
+            depth += 1;
+        }
         return evalAI(node,depth);
     }
 
@@ -29,6 +32,7 @@ public class Tree{
      *AIの評価値を計算する 
      */
     public static Node evalAI(Node node,int depth){
+
         Status status = node.getStatus();
         Board board = status.getBoard();
         int maxEval = Integer.MIN_VALUE;//評価値の最大
@@ -37,33 +41,40 @@ public class Tree{
         ArrayList<Piece> haveAIPiece = status.getAI().getHavePiece();
         int lenHavePiece = haveAIPiece.size();
 
-        for(int t =0;t<lenHavePiece;t++){
-            System.out.println(haveAIPiece.get(t).getClass());
-        }
+
 
         for(int i = 0; i < lenHavePiece ; i++){
+
+            //System.out.println(haveAIPiece.get(i).getPosition()+":"+haveAIPiece.get(i).getClass());//log
+
             //動く場所のリストを取得
             ArrayList<Integer> availableMoveList = Operator.availableMove(board, haveAIPiece.get(i).getPosition());
             
+            
+
             //それぞれの評価値を計算し、最も高い評価値を取得する
             int size = availableMoveList.size();
             for(int j = 0; j < size ; j++){
-
-                System.out.println(status.getAI().getHavePiece().get(i).getClass());//log
-                System.out.println(i +":"+j+":"+ status.getAI().getHavePiece().get(i).getPosition());//log
+                
+                //System.out.println("before:" + node.getStatus().getBoard().getPiece(2));//log
 
                 //駒を動かした新しいノードを用意する
                 Node nextNode = node.NodeClone(node);
-                Operator.operator(node.getStatus(),haveAIPiece.get(i).getPosition(),availableMoveList.get(j));
+                Operator.operator(nextNode.getStatus(),haveAIPiece.get(i).getPosition(),availableMoveList.get(j));
 
-                System.out.println(status.getAI().getHavePiece().get(i).getClass());//log
-                System.out.println(i +":"+j+":"+ status.getAI().getHavePiece().get(i).getPosition()+"\n");//log
-                
+                //System.out.println("after:" + node.getStatus().getBoard().getPiece(2));//log
+
                 //盤面を評価する
-                int eval=0;
+                int eval=-1;
                 if(depth >= 3){//深さが3以上の時、下の階層から評価値を取得する
+
+                    //System.out.println("再帰");
+
                     eval = evalHuman(nextNode,depth - 1).getEvaluation();
                 }else if(depth == 1){//深さ１の時、評価値を計算する
+
+                    //System.out.println("計算");
+
                     eval = Operator.calEval(nextNode.getStatus());
                 }
 
@@ -73,6 +84,7 @@ public class Tree{
                     nextNode.setEvaluation(eval);
                     maxNode = nextNode;
                 }
+                //System.out.println("depth = "+depth+":eval = " + eval);//log
             }
         }
         return maxNode;
@@ -105,6 +117,9 @@ public class Tree{
             //それぞれの動かし方の評価値を計算し、最も低い評価値を取得する
             int size = availableMoveList.size();
             for(int j = 0; j < size ; j++){
+
+                System.out.println(haveHumanPiece.get(i).getPosition()+":"+availableMoveList.get(j));
+
                 //駒を動かした新しいノードを用意する
                 Node nextNode = node.NodeClone(node);
                 Operator.operator(nextNode.getStatus(),haveHumanPiece.get(i).getPosition(),availableMoveList.get(j));
@@ -118,7 +133,9 @@ public class Tree{
                     nextNode.setEvaluation(eval);
                     minNode = nextNode;
                 }
+                System.out.println("depth = "+depth+":eval = " + eval);//log
             }
+
         }
         return minNode;
     }
