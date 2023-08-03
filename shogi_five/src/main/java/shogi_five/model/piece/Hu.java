@@ -17,14 +17,9 @@ public class Hu extends Piece{
      * コンストラクタ
      */
     public Hu(int position, boolean owner){
-        if (owner){
-            setPieceClass(6);
-        }else{
-            setPieceClass(16);
-        }
-        this.position = position;
-        this.promote = false;
-        this.owner = owner;
+        setPosition(position);   
+        setOwner(owner);
+        setPromote(false);
     }
 
     /*
@@ -101,6 +96,19 @@ public class Hu extends Piece{
     }
 
     /*
+     * ディープコピー
+     */
+    @Override
+    public Hu clone() throws CloneNotSupportedException{
+        try{
+            Hu cloned = (Hu)super.clone();
+            return cloned;
+        }catch (CloneNotSupportedException e){
+            throw new RuntimeException("クローンに失敗しました",e);
+        }
+    }
+
+    /*
      * 成りのゲッター
      */
     public boolean getPromote(){
@@ -111,6 +119,19 @@ public class Hu extends Piece{
      * 成りのセッター
      */
     public void setPromote(boolean promote){
+        if (promote){//成り
+            if (this.owner){
+                setPieceClass(10);
+            }else{
+                setPieceClass(20);
+            }
+        }else{
+            if (this.owner){
+                setPieceClass(6);
+            }else{
+                setPieceClass(16);
+            }
+        }
         this.promote = promote;
     }
 

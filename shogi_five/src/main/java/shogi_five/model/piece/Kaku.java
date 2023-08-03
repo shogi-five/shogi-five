@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import shogi_five.model.*;
 
 /*
- * 飛車の駒
+ * 角の駒
  */
 
 public class Kaku extends Piece{
@@ -32,10 +32,167 @@ public class Kaku extends Piece{
      */
     public ArrayList<Integer> move(Board board){
         ArrayList<Integer> moveList = new ArrayList<>();
+        //成っている・成っていない共通の動き
+         //右下への移動
+        for(int i = this.position ; i < 20; i = i + 6){
+            //positionが右端の場合forから抜ける
+            if (this.position % 5 == 4){
+                break;
+            }
 
-        return moveList;
+            //移動先に自分の駒があるときfor文から抜ける
+            if ((board.getPiece(i + 6) != null) && (board.getPiece(i + 6).getOwner() == this.owner)){
+                break;
+            }
+
+            //移動先が右端の場合移動先を追加してforから抜ける
+            if ((i + 6)  % 5 == 4) {
+                moveList.add(i + 6);
+                break;
+            }
+
+            //移動先に相手の駒があるとき,移動先を追加してfor文から抜ける
+            if ((board.getPiece(i + 6) != null) && (board.getPiece(i + 6).getOwner() != this.owner)){
+                moveList.add(i + 6);
+                break;
+            }
+
+            moveList.add(i + 6);
+        }
+
+        //左下への移動
+        for(int i = this.position ; i < 20; i = i + 4){
+           //positionが左端の場合forから抜ける
+            if (this.position % 5 == 0){
+               break;
+            }
+
+           //移動先に自分の駒があるときfor文から抜ける
+            if ((board.getPiece(i + 4) != null) && (board.getPiece(i + 4).getOwner() == this.owner)){
+               break;
+            }
+
+           //移動先が左端の場合移動先を追加してforから抜ける
+            if ((i + 4)  % 5 == 0) {
+               moveList.add(i + 4);
+               break;
+            }
+
+           //移動先に相手の駒があるとき,移動先を追加してfor文から抜ける
+            if ((board.getPiece(i + 4) != null) && (board.getPiece(i + 4).getOwner() != this.owner)){
+               moveList.add(i + 4);
+               break;
+            }
+
+            moveList.add(i + 4);
+        }
+
+
+       //右上への移動
+        for(int i = this.position ; i > 4; i = i - 4){
+            //positionが右端の場合forから抜ける
+            if (this.position % 5 == 4){
+                break;
+            }
+
+            //移動先に自分の駒があるときfor文から抜ける
+            if ((board.getPiece(i - 4) != null) && (board.getPiece(i - 4).getOwner() == this.owner)){
+                break;
+            }
+
+            //移動先が右端の場合移動先を追加してforから抜ける
+            if ((i - 4)  % 5 == 4) {
+                moveList.add(i - 4);
+                break;
+            }
+
+            //移動先に相手の駒があるとき,移動先を追加してfor文から抜ける
+            if ((board.getPiece(i - 4) != null) && (board.getPiece(i - 4).getOwner() != this.owner)){
+                moveList.add(i - 4);
+                break;
+            }
+
+            moveList.add(i - 4);
+        }
+
+        //左上への移動
+        for(int i = this.position ; i > 4; i = i - 6){
+            //positionが左端の場合forから抜ける
+            if (this.position % 5 == 0){
+                break;
+            }
+
+            //移動先に自分の駒があるときfor文から抜ける
+            if ((board.getPiece(i - 6) != null) && (board.getPiece(i - 6).getOwner() == this.owner)){
+                break;
+            }
+
+            //移動先が左端の場合移動先を追加してforから抜ける
+            if ((i - 6)  % 5 == 0) {
+                moveList.add(i - 6);
+                break;
+            }
+
+            //移動先に相手の駒があるとき,移動先を追加してfor文から抜ける
+            if ((board.getPiece(i - 6) != null) && (board.getPiece(i - 6).getOwner() != this.owner)){
+                moveList.add(i - 6);
+                break;
+            }
+
+            moveList.add(i - 6);
+        }
+
+        //成っているときの動き
+        if (this.promote == true){
+            //上への動き(マイナス方向)
+            if (this.position > 4){
+                //移動先に自分の駒がないとき
+                if ((board.getPiece(this.position - 5) == null) || (board.getPiece(this.position - 5).getOwner() != this.owner)){
+                    moveList.add(this.position - 5);
+                }
+            }
+
+            //下への動き(プラス方向)
+            if (this.position < 20){
+                //移動先に自分の駒がないとき
+                if ((board.getPiece(this.position + 5) == null) || (board.getPiece(this.position + 5).getOwner() != this.owner)){
+                    moveList.add(this.position + 5);
+                }
+            }
+
+            //右への動き(プラス方向)
+            if (this.position % 5 != 4){
+                //移動先に自分の駒がないとき
+                if ((board.getPiece(this.position + 1) == null) || (board.getPiece(this.position + 1).getOwner() != this.owner)){
+                    moveList.add(this.position + 1);
+                }
+            }
+
+            //左への動き(マイナス方向)
+            if (this.position % 5 != 0){
+                //移動先に自分の駒がないとき
+                if ((board.getPiece(this.position - 1) == null) || (board.getPiece(this.position - 1).getOwner() != this.owner)){
+                    moveList.add(this.position - 1);
+                }
+            }
+
+        }
+
+    return moveList;
+}
+
+    /*
+     * ディープコピー
+     */
+    @Override
+    public Kaku clone() throws CloneNotSupportedException{
+        try{
+            Kaku cloned = (Kaku)super.clone();
+            return cloned;
+        }catch (CloneNotSupportedException e){
+            throw new RuntimeException("クローンに失敗しました",e);
+        }
     }
-
 
     /*
      * 成りのゲッター
@@ -74,7 +231,7 @@ public class Kaku extends Piece{
      */
     public void setOwner(boolean owner){
         this.owner = owner;
-    }    
+    }
     /*
      * pieceClassのゲッター
      */

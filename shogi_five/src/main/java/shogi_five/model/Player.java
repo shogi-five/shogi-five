@@ -8,7 +8,7 @@ import java.util.ArrayList;
 //プレイヤーを表すクラス
 //自分が所有している駒,移動可能な駒と行き先を持つ
 
-public abstract class Player{
+public abstract class Player implements Cloneable{
 
     //フィールド変数
     private ArrayList<Piece> havePiece;  //所有している駒

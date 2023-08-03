@@ -2,7 +2,7 @@ package shogi_five.model;
 
 import shogi_five.model.piece.*;
 
-public class Board {
+public class Board implements Cloneable{
     /*
      * フィールド
      * 盤面の座標
@@ -55,5 +55,18 @@ public class Board {
      */
     public Piece getPiece(int position){
         return this.board[position];
+    }
+
+    /*
+     * ディープコピー
+     */
+    @Override
+    public Board clone() throws CloneNotSupportedException{
+        try{
+            Board cloned = (Board)super.clone();
+            return cloned;
+        }catch (CloneNotSupportedException e){
+            throw new RuntimeException("クローンに失敗しました",e);
+        }
     }
 }

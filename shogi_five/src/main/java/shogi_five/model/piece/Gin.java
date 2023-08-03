@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import shogi_five.model.*;
 
 /*
- * 飛車の駒
+ * 銀の駒
  */
 
 public class Gin extends Piece{
@@ -17,14 +17,9 @@ public class Gin extends Piece{
      * コンストラクタ
      */
     public Gin(int position, boolean owner){
-        if (owner){
-            setPieceClass(5);
-        }else{
-            setPieceClass(15);
-        }
-        this.position = position;
-        this.promote = false;
-        this.owner = owner;
+        setPosition(position);
+        setOwner(owner);
+        setPromote(false);
     }
 
     /*
@@ -110,6 +105,18 @@ public class Gin extends Piece{
         return moveList;
     }
 
+    /*
+     * ディープコピー
+     */
+    @Override
+    public Gin clone() throws CloneNotSupportedException{
+        try{
+            Gin cloned = (Gin)super.clone();
+            return cloned;
+        }catch (CloneNotSupportedException e){
+            throw new RuntimeException("クローンに失敗しました",e);
+        }
+    }
 
     /*
      * 成りのゲッター
@@ -122,7 +129,19 @@ public class Gin extends Piece{
      * 成りのセッター
      */
     public void setPromote(boolean promote){
-        this.promote = promote;
+        if (promote){//成り
+            if (this.owner){
+                setPieceClass(9);
+            }else{
+                setPieceClass(19);
+            }
+        }else{
+            if (this.owner){
+                setPieceClass(5);
+            }else{
+                setPieceClass(15);
+            }
+        }        
     }
 
     /*
