@@ -2,7 +2,7 @@ package shogi_five.model;
 
 import shogi_five.model.Status;
 
-public class Node{
+public class Node implements Cloneable{
     private Status status;
     private int evaluation;
     private int parent;
