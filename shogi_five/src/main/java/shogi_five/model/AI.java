@@ -26,6 +26,18 @@ public class AI extends Player{
     }
 
     /*
+     * ディープコピー
+     */
+    public AI clone() throws CloneNotSupportedException{
+        try{
+            AI cloned = (AI)super.clone();
+            return cloned;
+        }catch (CloneNotSupportedException e){
+            throw new RuntimeException("クローンに失敗しました",e);
+        }
+    }
+
+    /*
      * 探索を行う
      * @ return Status nextStatus 探索の結果得られたStatusを返す
      */
