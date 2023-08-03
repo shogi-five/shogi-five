@@ -105,6 +105,18 @@ public class Gin extends Piece{
         return moveList;
     }
 
+    /*
+     * ディープコピー
+     */
+    @Override
+    public Gin clone() throws CloneNotSupportedException{
+        try{
+            Gin cloned = (Gin)super.clone();
+            return cloned;
+        }catch (CloneNotSupportedException e){
+            throw new RuntimeException("クローンに失敗しました",e);
+        }
+    }
 
     /*
      * 成りのゲッター

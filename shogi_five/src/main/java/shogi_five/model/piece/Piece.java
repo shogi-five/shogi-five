@@ -3,6 +3,7 @@ package shogi_five.model.piece;
 import java.util.ArrayList;
 
 import shogi_five.model.Board;
+import shogi_five.model.Human;
 
 /**
  * 将棋の駒を表す抽象クラス
@@ -22,4 +23,18 @@ public abstract class Piece implements Cloneable{
     public abstract int getPieceClass();
     public abstract boolean getPromote();
     public abstract int getPosition();
+
+    /*
+     * ディープコピー
+     */
+    @Override
+    public Piece clone() throws CloneNotSupportedException{
+        try{
+            Piece cloned = (Piece)super.clone();
+            return cloned;
+        }catch (CloneNotSupportedException e){
+            throw new RuntimeException("クローンに失敗しました",e);
+        }
+    }
+
 }
