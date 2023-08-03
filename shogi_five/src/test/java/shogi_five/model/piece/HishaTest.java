@@ -27,11 +27,11 @@ public class HishaTest {
         }
 
         //飛車を置く
-        int pos = 18;
+        int pos = 0;
         board.setPiece(new Hisha(pos, true), pos);
 
         //動く位置に駒を置く
-        board.setPiece(new Gin(13,false), 13);
+        board.setPiece(new Gin(1,true), 1);
         board.getPiece(pos).setPromote(true);
 
         //表示
