@@ -153,13 +153,28 @@ public class Hisha extends Piece{
     public boolean getPromote(){
         return this.promote;
     }
+    
 
     /*
      * 成りのセッター
      */
     public void setPromote(boolean promote){
+        if (promote){//成り
+            if (this.owner){
+                setPieceClass(7);
+            }else{
+                setPieceClass(17);
+            }
+        }else{
+            if (this.owner){
+                setPieceClass(2);
+            }else{
+                setPieceClass(12);
+            }
+        }
         this.promote = promote;
     }
+
 
     /*
      * 位置のセッター
