@@ -2,8 +2,9 @@ package shogi_five.view;
 
 import java.util.Optional;
 import shogi_five.controller.GameController;
-import shogi_five.model.board.Board;
+import shogi_five.model.Board;
 import shogi_five.model.piece.Piece;
+import shogi_five.view.PieceKind;
 
 public class View {
     private GameController gameController;
@@ -38,6 +39,7 @@ public class View {
         this.des = null;
         for (int i = 0; i < 45; i++) {
             Piece p = board.getPiece(i);
+
             
             this.frame.setPiece(i, PieceKind.from(p), !p.getOwner());
         }
