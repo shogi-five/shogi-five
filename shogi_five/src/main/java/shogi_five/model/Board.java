@@ -61,9 +61,17 @@ public class Board implements Cloneable{
      * ディープコピー
      */
     @Override
-    public Board clone() throws CloneNotSupportedException{
+    public Board clone(){
         try{
             Board cloned = (Board)super.clone();
+            cloned.board = new Piece[board.length];
+            for(int i=0;i<board.length;i++){
+                if(board[i] != null){
+                    cloned.board[i] = board[i].clone();
+                }else{
+                    cloned.board[i] = null;
+                }
+            }
             return cloned;
         }catch (CloneNotSupportedException e){
             throw new RuntimeException("クローンに失敗しました",e);

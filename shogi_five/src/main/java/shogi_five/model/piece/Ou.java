@@ -98,13 +98,13 @@ public class Ou extends Piece{
      * ディープコピー
      */
     @Override
-    public Ou clone() throws CloneNotSupportedException{
-        try{
-            Ou cloned = (Ou)super.clone();
-            return cloned;
-        }catch (CloneNotSupportedException e){
-            throw new RuntimeException("クローンに失敗しました",e);
-        }
+    public Ou clone(){
+        Ou cloned = (Ou)super.clone();
+        cloned.position = position;
+        cloned.owner = owner;
+        cloned.pieceClass = pieceClass;
+        cloned.promote = promote;
+        return cloned;
     }
 
     /*

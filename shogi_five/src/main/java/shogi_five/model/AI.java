@@ -29,9 +29,14 @@ public class AI extends Player{
      * ディープコピー
      */
     @Override
-    public AI clone() throws CloneNotSupportedException{
+    public AI clone(){
         try{
             AI cloned = (AI)super.clone();
+            cloned.havePiece = new ArrayList<>();
+            for(Piece piece:havePiece){
+                cloned.havePiece.add(piece.clone());
+            }
+            cloned.availblePiece = new ArrayList<>(availblePiece);
             return cloned;
         }catch (CloneNotSupportedException e){
             throw new RuntimeException("クローンに失敗しました",e);

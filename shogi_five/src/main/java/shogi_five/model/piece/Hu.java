@@ -99,13 +99,13 @@ public class Hu extends Piece{
      * ディープコピー
      */
     @Override
-    public Hu clone() throws CloneNotSupportedException{
-        try{
-            Hu cloned = (Hu)super.clone();
-            return cloned;
-        }catch (CloneNotSupportedException e){
-            throw new RuntimeException("クローンに失敗しました",e);
-        }
+    public Hu clone(){
+        Hu cloned = (Hu)super.clone();
+        cloned.position = position;
+        cloned.owner = owner;
+        cloned.pieceClass = pieceClass;
+        cloned.promote = promote;
+        return cloned;
     }
 
     /*

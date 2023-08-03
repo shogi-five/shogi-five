@@ -185,13 +185,13 @@ public class Kaku extends Piece{
      * ディープコピー
      */
     @Override
-    public Kaku clone() throws CloneNotSupportedException{
-        try{
-            Kaku cloned = (Kaku)super.clone();
-            return cloned;
-        }catch (CloneNotSupportedException e){
-            throw new RuntimeException("クローンに失敗しました",e);
-        }
+    public Kaku clone(){
+        Kaku cloned = (Kaku)super.clone();
+        cloned.position = position;
+        cloned.owner = owner;
+        cloned.pieceClass = pieceClass;
+        cloned.promote = promote;
+        return cloned;
     }
 
     /*

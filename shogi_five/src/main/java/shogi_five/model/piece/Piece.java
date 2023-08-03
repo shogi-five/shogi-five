@@ -28,9 +28,13 @@ public abstract class Piece implements Cloneable{
      * ディープコピー
      */
     @Override
-    public Piece clone() throws CloneNotSupportedException{
+    public Piece clone(){
         try{
             Piece cloned = (Piece)super.clone();
+            cloned.position = position;
+            cloned.owner = owner;
+            cloned.pieceClass = pieceClass;
+            cloned.promote = promote;
             return cloned;
         }catch (CloneNotSupportedException e){
             throw new RuntimeException("クローンに失敗しました",e);

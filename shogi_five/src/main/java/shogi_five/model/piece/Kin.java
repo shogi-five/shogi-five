@@ -135,13 +135,13 @@ public class Kin extends Piece{
      * ディープコピー
      */
     @Override
-    public Kin clone() throws CloneNotSupportedException{
-        try{
-            Kin cloned = (Kin)super.clone();
-            return cloned;
-        }catch (CloneNotSupportedException e){
-            throw new RuntimeException("クローンに失敗しました",e);
-        }
+    public Kin clone(){
+        Kin cloned = (Kin)super.clone();
+        cloned.position = position;
+        cloned.owner = owner;
+        cloned.pieceClass = pieceClass;
+        cloned.promote = promote;
+        return cloned;
     }
 
     /*

@@ -59,7 +59,12 @@ public class Tree{
                 //System.out.println("before:" + node.getStatus().getBoard().getPiece(2));//log
 
                 //駒を動かした新しいノードを用意する
-                Node nextNode = node.NodeClone(node);
+                Node nextNode;
+                try{
+                    nextNode = node.clone();
+                }catch (CloneNotSupportedException e){
+                    throw new RuntimeException("クローンに失敗しました",e);
+                }
                 Operator.operator(nextNode.getStatus(),haveAIPiece.get(i).getPosition(),availableMoveList.get(j));
 
                 //System.out.println("after:" + node.getStatus().getBoard().getPiece(2));//log

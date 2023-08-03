@@ -73,7 +73,7 @@ public class Node implements Cloneable{
      * ディープコピー
      */
     @Override
-    public Node clone() throws CloneNotSupportedException{
+    public Node clone(){
         try{
             Node cloned = (Node)super.clone();
             cloned.status = this.status.clone();
