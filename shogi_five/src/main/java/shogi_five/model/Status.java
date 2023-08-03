@@ -23,8 +23,15 @@ public class Status implements Cloneable{
      * ディープコピー
      */
     public Status clone() throws CloneNotSupportedException{
-        Status clone = (Status)super.clone();
-        return clone;
+        try{
+            Status cloned = (Status)super.clone();
+            cloned.board = this.board.clone();
+            cloned.human = this.human.clone();
+            cloned.ai = this.ai.clone();
+            return cloned;
+        }catch (CloneNotSupportedException e){
+            throw new RuntimeException("クローンに失敗しました",e);
+        }
     }
 
     public Board getBoard(){

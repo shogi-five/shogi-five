@@ -23,6 +23,18 @@ public class Human extends Player{
     }
 
     /*
+     * ディープコピー
+     */
+    public Human clone() throws CloneNotSupportedException{
+        try{
+            Human cloned = (Human)super.clone();
+            return cloned;
+        }catch (CloneNotSupportedException e){
+            throw new RuntimeException("クローンに失敗しました",e);
+        }
+    }
+
+    /*
      * havePieceに駒を追加
      */
     public void addHavePiece(Piece piece){

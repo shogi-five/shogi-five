@@ -60,9 +60,16 @@ public class Node{
     }
 
 
-    //Nodeのディープコピー 
-    public Node NodeClone(Node node){
-        return new Node(node.status,node.parent,node.child);
-    } 
+    /*
+     * ディープコピー
+     */
+    public Node clone() throws CloneNotSupportedException{
+        try{
+            Node cloned = (Node)super.clone();
+            return cloned;
+        }catch (CloneNotSupportedException e){
+            throw new RuntimeException("クローンに失敗しました",e);
+        }
+    }
 
 }
