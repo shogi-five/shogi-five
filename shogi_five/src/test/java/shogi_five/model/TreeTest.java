@@ -25,8 +25,8 @@ public class TreeTest{
         ArrayList<Chooseable> availavelePieceAI = new ArrayList<>();
         ArrayList<Piece> havePieceAI = new ArrayList<>();
         
-        //havePieceAI.add(board.getPiece(0));
-        //havePieceAI.add(board.getPiece(1));
+        havePieceAI.add(board.getPiece(0));
+        havePieceAI.add(board.getPiece(1));
         havePieceAI.add(board.getPiece(2));
         havePieceAI.add(board.getPiece(3));
         havePieceAI.add(board.getPiece(4));
@@ -36,12 +36,12 @@ public class TreeTest{
         ArrayList<Chooseable> availavelePieceHuman = new ArrayList<>();
         ArrayList<Piece> havePieceHuman = new ArrayList<>();
 
-        //havePieceAI.add(board.getPiece(24));
-        //havePieceAI.add(board.getPiece(23));
-        havePieceAI.add(board.getPiece(22));
-        havePieceAI.add(board.getPiece(21));
-        havePieceAI.add(board.getPiece(20));
-        havePieceAI.add(board.getPiece(15));
+        havePieceHuman.add(board.getPiece(24));
+        havePieceHuman.add(board.getPiece(23));
+        havePieceHuman.add(board.getPiece(22));
+        havePieceHuman.add(board.getPiece(21));
+        havePieceHuman.add(board.getPiece(20));
+        havePieceHuman.add(board.getPiece(15));
 
         AI ai = new AI(havePieceAI, availavelePieceAI);
         Human human = new Human(havePieceHuman,availavelePieceHuman);
@@ -50,11 +50,10 @@ public class TreeTest{
 
         Node ans = Tree.miniMax(node, 3);
         Board ansBoard = ans.getStatus().getBoard();
-        for(int i = 0;i < 5;i++){
+        for(int i = 1;i < 6;i++){
             for(int j = 0;j<5;j++){
-                //System.out.print(ansBoard.getPiece(i*j)+" ");
+                System.out.println(ansBoard.getPiece(i*j)+" 位置は"+i*j);
             }
-            //System.out.println("");
         }
 
         //assertEquals(board.getPiece(8), null);
