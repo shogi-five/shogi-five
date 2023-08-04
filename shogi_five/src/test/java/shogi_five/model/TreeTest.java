@@ -19,7 +19,7 @@ public class TreeTest{
      * 駒の動きをテスト
      */
     @Test
-    public void testMove() {
+    public void testMiniMax() {
         //盤面を用意する
         Board board = new Board();
 
@@ -49,12 +49,12 @@ public class TreeTest{
         Status status = new Status(board, human, ai);
         Node node = new Node(status,0,0);
 
-        //動かした盤面から計算してみる
-        Operator.operator(status, 0, 5);
-        Operator.operator(status, 24, 9);
+        //盤面を動かす
+        //Operator.operator(status, 0, 5);
+        //Operator.operator(status, 24, 9);
 
 
-        Node ans = Tree.miniMax(node, 5);
+        Node ans = Tree.miniMax(node, 3);
         Board ansBoard = ans.getStatus().getBoard();
         for(int i = 0;i < 45;i++){
             System.out.print(" position = "+(i)+":"+ansBoard.getPiece(i)+":");
