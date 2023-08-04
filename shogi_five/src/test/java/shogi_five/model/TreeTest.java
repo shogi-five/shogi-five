@@ -25,8 +25,8 @@ public class TreeTest{
         ArrayList<Chooseable> availavelePieceAI = new ArrayList<>();
         ArrayList<Piece> havePieceAI = new ArrayList<>();
         
-        //havePieceAI.add(board.getPiece(0));
-        //havePieceAI.add(board.getPiece(1));
+        havePieceAI.add(board.getPiece(0));
+        havePieceAI.add(board.getPiece(1));
         havePieceAI.add(board.getPiece(2));
         havePieceAI.add(board.getPiece(3));
         havePieceAI.add(board.getPiece(4));
@@ -36,26 +36,24 @@ public class TreeTest{
         ArrayList<Chooseable> availavelePieceHuman = new ArrayList<>();
         ArrayList<Piece> havePieceHuman = new ArrayList<>();
 
-        //havePieceAI.add(board.getPiece(24));
-        //havePieceAI.add(board.getPiece(23));
-        havePieceAI.add(board.getPiece(22));
-        havePieceAI.add(board.getPiece(21));
-        havePieceAI.add(board.getPiece(20));
-        havePieceAI.add(board.getPiece(15));
+        havePieceHuman.add(board.getPiece(24));
+        havePieceHuman.add(board.getPiece(23));
+        havePieceHuman.add(board.getPiece(22));
+        havePieceHuman.add(board.getPiece(21));
+        havePieceHuman.add(board.getPiece(20));
+        havePieceHuman.add(board.getPiece(15));
 
         AI ai = new AI(havePieceAI, availavelePieceAI);
         Human human = new Human(havePieceHuman,availavelePieceHuman);
         Status status = new Status(board, human, ai);
         Node node = new Node(status,0,0);
 
-        Node ans = Tree.miniMax(node, 3);
+        Node ans = Tree.miniMax(node, 5);
         Board ansBoard = ans.getStatus().getBoard();
-        for(int i = 0;i < 5;i++){
-            for(int j = 0;j<5;j++){
-                //System.out.print(ansBoard.getPiece(i*j)+" ");
-            }
-            //System.out.println("");
+        for(int i = 0;i < 45;i++){
+            System.out.println(" position = "+(i)+":"+ansBoard.getPiece(i));
         }
+        System.out.println("\neval = " + ans.getEvaluation());
 
         //assertEquals(board.getPiece(8), null);
     }
