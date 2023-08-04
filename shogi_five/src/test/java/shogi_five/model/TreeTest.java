@@ -48,13 +48,12 @@ public class TreeTest{
         Status status = new Status(board, human, ai);
         Node node = new Node(status,0,0);
 
-        Node ans = Tree.miniMax(node, 3);
+        Node ans = Tree.miniMax(node, 5);
         Board ansBoard = ans.getStatus().getBoard();
-        for(int i = 1;i < 6;i++){
-            for(int j = 0;j<5;j++){
-                System.out.println(ansBoard.getPiece(i*j)+" 位置は"+i*j);
-            }
+        for(int i = 0;i < 45;i++){
+            System.out.println(" position = "+(i)+":"+ansBoard.getPiece(i));
         }
+        System.out.println("\neval = " + ans.getEvaluation());
 
         //assertEquals(board.getPiece(8), null);
     }

@@ -34,25 +34,44 @@ public class Tree{
      *AIの評価値を計算する 
      */
     public static Node evalAI(Node node,int depth){
-
+        //System.out.println("depth = "+depth);//log
         if(depth == 1){
             int eval = Operator.calEval(node.getStatus());
             node.setEvaluation(eval);
             return node;
         }
 
-        Status status = node.getStatus();
         Board board = node.getStatus().getBoard();
         int maxEval = Integer.MIN_VALUE;//評価値の最大
         Node maxNode = new Node();//評価値が最大のノード
         //Pieceのリストを取得
-        ArrayList<Piece> haveAIPiece = status.getAI().getHavePiece();
+        ArrayList<Piece> haveAIPiece = new ArrayList<>();
+        for(int k = 0;k<45;k++){
+            if(node.getStatus().getBoard().getPiece(k) != null){
+                if(node.getStatus().getBoard().getPiece(k).getOwner() == false){
+                    haveAIPiece.add(node.getStatus().getBoard().getPiece(k));
+                }
+            }
+        }
         int lenHavePiece = haveAIPiece.size();
+        /*  //log
+        for(int cnt = 0;cnt < lenHavePiece;cnt++){
+            System.out.println(haveAIPiece.get(cnt).getPosition());
+        }
+        */
         
 
         for(int i = 0; i < lenHavePiece ; i++){
             //動く場所のリストを取得
-            ArrayList<Integer> availableMoveList = Operator.availableMove(board, haveAIPiece.get(i).getPosition());            
+            ArrayList<Integer> availableMoveList = new ArrayList<>();
+            try{
+            availableMoveList = Operator.availableMove(board, haveAIPiece.get(i).getPosition());            
+            }catch(NullPointerException e){
+                System.out.println("NullPointerExceptionError\n評価値を強制的に計算します");
+                int eval = Operator.calEval(node.getStatus());
+                node.setEvaluation(eval);
+                return node;
+            }
 
             //それぞれの評価値を計算し、最も高い評価値を取得する
             int size = availableMoveList.size();
@@ -60,6 +79,8 @@ public class Tree{
                 //駒を動かした新しいノードを用意する
                 Node nextNode = node.clone();
                 Operator.operator(nextNode.getStatus(),haveAIPiece.get(i).getPosition(),availableMoveList.get(j));
+                nextNode.getStatus().getAI().getHavePiece().get(i).setPosition(availableMoveList.get(j));
+                
                 //盤面を評価する
                 int eval = evalHuman(nextNode,depth - 1).getEvaluation();
                 //評価値の最大値より大きければ代入
@@ -67,6 +88,8 @@ public class Tree{
                     maxEval = eval;
                     nextNode.setEvaluation(eval);
                     maxNode = nextNode;
+
+                    //System.out.println("depth = " + depth + "\neval = " +maxEval + "\n");//debug
                 }
             }
         }
@@ -78,23 +101,47 @@ public class Tree{
      * 人間の階層の評価値を計算する
      */
     public static Node evalHuman(Node node,int depth){
+        //System.out.println("depth = "+depth);//log
+
         Status status = node.getStatus();
         Board board = status.getBoard();
         int minEval = Integer.MAX_VALUE;//評価値の最小
         Node minNode = new Node();//評価値が最小のノード
 
         //Pieceのリストを取得
-        ArrayList<Piece> haveHumanPiece = status.getHuman().getHavePiece();
+        ArrayList<Piece> haveHumanPiece = new ArrayList<>();
+        for(int k = 0;k<45;k++){
+            if(node.getStatus().getBoard().getPiece(k) != null){
+                if(node.getStatus().getBoard().getPiece(k).getOwner() == true){
+                    haveHumanPiece.add(node.getStatus().getBoard().getPiece(k));
+                }
+            }
+        }
+
         int lenHavePiece = haveHumanPiece.size();
+
+        /*log 
+        for(int cnt1 = 0;cnt1 < 45;cnt1++){
+            if(board.getPiece(cnt1) != null){
+            System.out.println(" position = "+(cnt1)+":"+board.getPiece(cnt1).getOwner());
+            }
+        }
+        for(int cnt = 0;cnt < lenHavePiece;cnt++){
+            System.out.println("have human piece:"+haveHumanPiece.get(cnt).getPosition());
+        }
+        */
 
         for(int i = 0; i < lenHavePiece ; i++){
             //動く場所のリストを取得
-            ArrayList<Integer> availableMoveList = Operator.availableMove(board, haveHumanPiece.get(i).getPosition());
-            
-            
-            for(int k = 0;k< availableMoveList.size();k++){
+           ArrayList<Integer> availableMoveList = new ArrayList<>();
+            try{
+            availableMoveList = Operator.availableMove(board, haveHumanPiece.get(i).getPosition());            
+            }catch(NullPointerException e){
+                System.out.println("NullPointerExceptionError\n評価値を強制的に計算します");
+                int eval = Operator.calEval(node.getStatus());
+                node.setEvaluation(eval);
+                return node;
             }
-
             //それぞれの動かし方の評価値を計算し、最も低い評価値を取得する
             int size = availableMoveList.size();
             for(int j = 0; j < size ; j++){
