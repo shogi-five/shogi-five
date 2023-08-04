@@ -20,6 +20,7 @@ public class TreeTest{
      */
     @Test
     public void testMove() {
+        //盤面を用意する
         Board board = new Board();
 
         ArrayList<Chooseable> availavelePieceAI = new ArrayList<>();
@@ -48,10 +49,22 @@ public class TreeTest{
         Status status = new Status(board, human, ai);
         Node node = new Node(status,0,0);
 
+        //動かした盤面から計算してみる
+        Operator.operator(status, 0, 5);
+        Operator.operator(status, 24, 9);
+
+
         Node ans = Tree.miniMax(node, 5);
         Board ansBoard = ans.getStatus().getBoard();
         for(int i = 0;i < 45;i++){
-            System.out.println(" position = "+(i)+":"+ansBoard.getPiece(i));
+            System.out.print(" position = "+(i)+":"+ansBoard.getPiece(i)+":");
+            if(ansBoard.getPiece(i) == null){
+                System.out.println("");
+            }else if(ansBoard.getPiece(i).getOwner()){
+                System.out.println("true");
+            }else{
+                System.out.println("false");
+            }
         }
         System.out.println("\neval = " + ans.getEvaluation());
 
