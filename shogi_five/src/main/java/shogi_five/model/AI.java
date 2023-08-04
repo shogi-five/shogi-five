@@ -49,7 +49,8 @@ public class AI extends Player{
      */
     public Status inference(Status status){
         Tree search = new Tree();
-        Status nextStatus = search.miniMax().getStatus();
+        Node node = new Node(status, 0, 0);
+        Status nextStatus = search.miniMax(node, 3).getStatus();
         return nextStatus;
     }
 
