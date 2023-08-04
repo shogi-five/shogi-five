@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import javax.management.RuntimeErrorException;
 
-public class Tree{
+public class Tree{    
     /*
      * フィールド
      */
@@ -42,8 +42,8 @@ public class Tree{
         }
 
         Board board = node.getStatus().getBoard();
-        int maxEval = Integer.MIN_VALUE;//評価値の最大
-        Node maxNode = new Node();//評価値が最大のノード
+        int minEval = Integer.MAX_VALUE;//評価値の最小
+        Node minNode = new Node();//評価値が最小のノード
         //Pieceのリストを取得
         ArrayList<Piece> haveAIPiece = new ArrayList<>();
         for(int k = 0;k<45;k++){
@@ -83,17 +83,16 @@ public class Tree{
                 
                 //盤面を評価する
                 int eval = evalHuman(nextNode,depth - 1).getEvaluation();
-                //評価値の最大値より大きければ代入
-                if(maxEval < eval){
-                    maxEval = eval;
+                //評価値の最小値より小さければ代入
+                if(minEval > eval){
+                    minEval = eval;
                     nextNode.setEvaluation(eval);
-                    maxNode = nextNode;
-
+                    minNode = nextNode;
                     //System.out.println("depth = " + depth + "\neval = " +maxEval + "\n");//debug
                 }
             }
         }
-        return maxNode;
+        return minNode;
 
     }
 
@@ -105,8 +104,8 @@ public class Tree{
 
         Status status = node.getStatus();
         Board board = status.getBoard();
-        int minEval = Integer.MAX_VALUE;//評価値の最小
-        Node minNode = new Node();//評価値が最小のノード
+        int maxEval = Integer.MIN_VALUE;//評価値の最大
+        Node maxNode = new Node();//評価値が最大のノード
 
         //Pieceのリストを取得
         ArrayList<Piece> haveHumanPiece = new ArrayList<>();
@@ -152,15 +151,15 @@ public class Tree{
 
                 //盤面を評価する
                 int eval = evalAI(nextNode,depth - 1).getEvaluation();
-                //評価値の最大値より小さければ代入
-                if(minEval > eval){
-                    minEval = eval;
+                //評価値の最小値より大きければ代入
+                if(maxEval < eval){
+                    maxEval = eval;
                     nextNode.setEvaluation(eval);
-                    minNode = nextNode;
+                    maxNode = nextNode;
                 }
             }
 
         }
-        return minNode;
+        return maxNode;
     }
 }
