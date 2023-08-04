@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import javax.management.RuntimeErrorException;
 
-public class Tree{    
+public class Tree{
     /*
      * フィールド
      */
@@ -27,7 +27,7 @@ public class Tree{
         if(depth % 2 == 0){
             depth += 1;
         }
-        return evalAI(node,depth);
+        return evalHuman(node,depth);
     }
 
     /*
@@ -35,9 +35,10 @@ public class Tree{
      */
     public static Node evalAI(Node node,int depth){
         //System.out.println("depth = "+depth);//log
-        if(depth == 1){
+        if(depth == 0){
             int eval = Operator.calEval(node.getStatus());
             node.setEvaluation(eval);
+            //System.out.println("eval = "+eval);
             return node;
         }
 
@@ -48,7 +49,7 @@ public class Tree{
         ArrayList<Piece> haveAIPiece = new ArrayList<>();
         for(int k = 0;k<45;k++){
             if(node.getStatus().getBoard().getPiece(k) != null){
-                if(node.getStatus().getBoard().getPiece(k).getOwner() == false){
+                if(node.getStatus().getBoard().getPiece(k).getOwner() == true){
                     haveAIPiece.add(node.getStatus().getBoard().getPiece(k));
                 }
             }
@@ -67,7 +68,7 @@ public class Tree{
             try{
             availableMoveList = Operator.availableMove(board, haveAIPiece.get(i).getPosition());            
             }catch(NullPointerException e){
-                System.out.println("NullPointerExceptionError\n評価値を強制的に計算します");
+                //System.out.println("NullPointerExceptionError\n評価値を強制的に計算します");
                 int eval = Operator.calEval(node.getStatus());
                 node.setEvaluation(eval);
                 return node;
@@ -88,6 +89,7 @@ public class Tree{
                     minEval = eval;
                     nextNode.setEvaluation(eval);
                     minNode = nextNode;
+
                     //System.out.println("depth = " + depth + "\neval = " +maxEval + "\n");//debug
                 }
             }
@@ -111,7 +113,7 @@ public class Tree{
         ArrayList<Piece> haveHumanPiece = new ArrayList<>();
         for(int k = 0;k<45;k++){
             if(node.getStatus().getBoard().getPiece(k) != null){
-                if(node.getStatus().getBoard().getPiece(k).getOwner() == true){
+                if(node.getStatus().getBoard().getPiece(k).getOwner() == false){
                     haveHumanPiece.add(node.getStatus().getBoard().getPiece(k));
                 }
             }
@@ -151,7 +153,7 @@ public class Tree{
 
                 //盤面を評価する
                 int eval = evalAI(nextNode,depth - 1).getEvaluation();
-                //評価値の最小値より大きければ代入
+                //評価値の最大値より大きければ代入
                 if(maxEval < eval){
                     maxEval = eval;
                     nextNode.setEvaluation(eval);
