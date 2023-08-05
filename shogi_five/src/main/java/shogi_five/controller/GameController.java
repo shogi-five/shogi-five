@@ -55,11 +55,13 @@ public class GameController {
         ArrayList<Piece> aiPieces = new ArrayList<>();
 
         for (int i=0;i<25;i++){
-            Piece piece = this.status.getBoard().getPiece(i);
-            if(piece.getOwner()){//プレイヤーが所持する駒なら
-                humanPieces.add(piece);
-            }else{
-                aiPieces.add(piece);
+            if (this.status.getBoard().getPiece(i) != null){
+                Piece piece = this.status.getBoard().getPiece(i);
+                if(piece.getOwner()){//プレイヤーが所持する駒なら
+                    humanPieces.add(piece);
+                }else{
+                    aiPieces.add(piece);
+                }
             }
         }
 
