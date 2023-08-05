@@ -73,7 +73,9 @@ public class GameController {
     /*
      * 盤面の表示
      */
-    public void setView(){}
+    public void setView(){
+        this.view.printBoard(this.status.getBoard());
+    }
 
 
     /*
