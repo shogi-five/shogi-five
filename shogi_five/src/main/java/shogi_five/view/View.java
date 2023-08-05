@@ -40,8 +40,9 @@ public class View {
         for (int i = 0; i < 45; i++) {
             Piece p = board.getPiece(i);
 
-            
-            this.frame.setPiece(i, PieceKind.from(p), !p.getOwner());
+            if (p != null){
+                this.frame.setPiece(i, PieceKind.from(p), !p.getOwner());
+            }
         }
         this.frame.repaint();
     }
