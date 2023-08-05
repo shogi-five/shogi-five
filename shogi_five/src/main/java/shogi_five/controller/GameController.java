@@ -19,7 +19,7 @@ public class GameController {
      * ゲームをコントロールする
      */
     public GameController() {
-        this.status = new Status(new Board(), new Human(null,null), new AI(null, null));
+        this.status = new Status(new Board(), new Human(new ArrayList<Piece>(),new ArrayList<Chooseable>()), new AI(new ArrayList<Piece>(), new ArrayList<Chooseable>()));
         this.view = new View(this);
         this.operator = new Operator();
         this.previousBoard = new ArrayList<Status>();
