@@ -62,7 +62,7 @@ public class Tree{
         */
         
 
-        for(int i = 0; i < lenHavePiece ; i++){
+        for1: for(int i = 0; i < lenHavePiece ; i++){
             //動く場所のリストを取得
             ArrayList<Integer> availableMoveList = new ArrayList<>();
             try{
@@ -75,12 +75,17 @@ public class Tree{
             }
 
             //それぞれの評価値を計算し、最も高い評価値を取得する
-            int size = availableMoveList.size();
-            for(int j = 0; j < size ; j++){
+            
+            for2: for(int j = 0; j < availableMoveList.size() ; j++){
                 //駒を動かした新しいノードを用意する
                 Node nextNode = node.clone();
                 Operator.operator(nextNode.getStatus(),haveAIPiece.get(i).getPosition(),availableMoveList.get(j));
-                nextNode.getStatus().getAI().getHavePiece().get(i).setPosition(availableMoveList.get(j));
+                
+                ArrayList<Piece> pieces = nextNode.getStatus().getAI().getHavePiece();
+                if (i >= pieces.size()) {
+                    break for1;
+                }
+                pieces.get(i).setPosition(availableMoveList.get(j));
                 
                 //盤面を評価する
                 int eval = evalHuman(nextNode,depth - 1).getEvaluation();

@@ -35,7 +35,7 @@ public class GameController {
 
         
 
-        while (!this.checkVictory(false) && ! this.checkVictory(true)) {
+        while (!this.checkVictory(false) || ! this.checkVictory(true)) {
             if (this.isHumanturn) {
                 continue;
             }
