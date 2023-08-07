@@ -41,7 +41,8 @@ public class View {
             Piece p = board.getPiece(i);
 
             
-            this.frame.setPiece(i, PieceKind.from(p), !p.getOwner());
+            this.frame.setPiece(i, PieceKind.from(p), !(p == null ? true : p.getOwner()));
+            
         }
         this.frame.repaint();
     }
@@ -56,6 +57,7 @@ public class View {
         if (src.isDownward()) {
             return;
         }
+        System.out.println(src.getPosition() + "to" + des.getPosition());
         this.gameController.putPieceEvent(src.getPosition(), des.getPosition());
         
     }
