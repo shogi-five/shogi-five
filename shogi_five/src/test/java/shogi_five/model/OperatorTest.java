@@ -397,4 +397,61 @@ public class OperatorTest {
         //正解と比較
         assertEquals(39, evaluation);
     }
+
+    /*
+     * 駒が移動した際のhumanとaiの更新のテスト
+     */
+    @Test
+    public void humanAiChangeTest(){
+        //盤面を用意する
+        Board board = new Board();
+
+        ArrayList<Chooseable> availavelePieceAI = new ArrayList<>();
+        ArrayList<Piece> havePieceAI = new ArrayList<>();
+        
+        havePieceAI.add(board.getPiece(0));
+        havePieceAI.add(board.getPiece(1));
+        havePieceAI.add(board.getPiece(2));
+        havePieceAI.add(board.getPiece(3));
+        havePieceAI.add(board.getPiece(4));
+        havePieceAI.add(board.getPiece(9));
+        
+
+        ArrayList<Chooseable> availavelePieceHuman = new ArrayList<>();
+        ArrayList<Piece> havePieceHuman = new ArrayList<>();
+
+        havePieceHuman.add(board.getPiece(24));
+        havePieceHuman.add(board.getPiece(23));
+        havePieceHuman.add(board.getPiece(22));
+        havePieceHuman.add(board.getPiece(21));
+        havePieceHuman.add(board.getPiece(20));
+        havePieceHuman.add(board.getPiece(15));
+
+        AI ai = new AI(havePieceAI, availavelePieceAI);
+        Human human = new Human(havePieceHuman,availavelePieceHuman);
+        Status status = new Status(board, human, ai);
+
+        //動かした盤面から計算してみる
+        Operator.operator(status, 0, 5);
+        Operator.operator(status, 24, 9);
+
+        for(int i=0;i<45;i++){
+            Piece piece = status.getBoard().getPiece(i);//盤面から駒を取得
+            if (piece == null){//nullの場合
+                continue;
+            }else if(piece.getOwner()){//humanが所有の場合
+                for(Piece p:human.getHavePiece()){
+                    if (piece.getPosition() == p.getPosition()){
+                        assertEquals(p.getOwner(), piece.getOwner());
+                    }
+                }
+            }else{//aiが所有の場合
+                for(Piece p:human.getHavePiece()){
+                    if (piece.getClass() == p.getClass() && p.getOwner() == piece.getOwner()){
+                        assertEquals(p.getOwner(), piece.getOwner());
+                    }
+                }
+            }
+        }
+    }
 }
