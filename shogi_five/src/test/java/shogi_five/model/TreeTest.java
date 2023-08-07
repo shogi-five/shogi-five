@@ -54,7 +54,7 @@ public class TreeTest{
         //Operator.operator(status, 24, 9);
 
 
-        Node ans = Tree.miniMax(node, 3);
+        Node ans = Tree.miniMax(node, 5);
         Board ansBoard = ans.getStatus().getBoard();
         for(int i = 0;i < 45;i++){
             System.out.print(" position = "+(i)+":"+ansBoard.getPiece(i)+":");
