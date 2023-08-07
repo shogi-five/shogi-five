@@ -36,6 +36,10 @@ public class Operator {
             for(Piece p:ai.getHavePiece()){if(p.getPosition() == now){playerpiece = p;}}
         }
 
+        if (playerpiece == null) {
+            return null;
+        }
+
         Status next_status = new Status(board, human, ai);
 
         if (board.getPiece(next) == null){ //移動先に駒がない場合
