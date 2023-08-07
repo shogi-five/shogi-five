@@ -61,7 +61,7 @@ public class DrawGame extends JPanel{
 
 
 class Board extends JPanel {
-    private static final Image img = Toolkit.getDefaultToolkit().getImage("board.png");
+    private static final Image img = Toolkit.getDefaultToolkit().getImage("assets\\img\\board.png");
     
     private View view;
     private Grid grid;

@@ -42,7 +42,19 @@ public class GameController {
             Status AINextStatus = getNextAIStatus();//AIの探索
             this.updateStatus(AINextStatus);//Statusの更新
             this.setView();//更新を反映
+
+            this.isHumanturn = true;
+            // DEBUG
+            Board board = this.status.getBoard();
+            for (int i = 0; i < 25; i++) {
+                Piece p = board.getPiece(i);
+                if (p == null) {
+                    continue;
+                }
+                
+            }
         }
+        System.out.println("決着がつきました");
         
 
     }
@@ -55,13 +67,14 @@ public class GameController {
         ArrayList<Piece> aiPieces = new ArrayList<>();
 
         for (int i=0;i<25;i++){
-            if (this.status.getBoard().getPiece(i) != null){
-                Piece piece = this.status.getBoard().getPiece(i);
-                if(piece.getOwner()){//プレイヤーが所持する駒なら
-                    humanPieces.add(piece);
-                }else{
-                    aiPieces.add(piece);
-                }
+            Piece piece = this.status.getBoard().getPiece(i);
+            if (piece == null) {
+                continue;
+            }
+            if(piece.getOwner()){//プレイヤーが所持する駒なら
+                humanPieces.add(piece);
+            }else{
+                aiPieces.add(piece);
             }
         }
 

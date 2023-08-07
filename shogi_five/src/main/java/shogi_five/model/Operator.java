@@ -210,10 +210,14 @@ public class Operator {
             }
         }else{
             //駒を取得
-            Piece piece = board.getPiece(position);        
+            Piece piece = board.getPiece(position);
+            
             
             //駒が移動できるリストを取得
-            positionList = piece.move(board); 
+            if (piece != null) {
+                positionList = piece.move(board); 
+            }
+            
         }
         return positionList;
     }
