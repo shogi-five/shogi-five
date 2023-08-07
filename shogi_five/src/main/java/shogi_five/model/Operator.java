@@ -24,6 +24,10 @@ public class Operator {
         Human human = status.getHuman();
         AI ai = status.getAI();
 
+        //statusの内容を表示
+        //System.out.println("piece:" + board.getPiece(now) + " (" + board.getPiece(now).getOwner() + ")"+  ":now:" + now + ", piece:"  + board.getPiece(next)+  ":next:" + next);
+        //printStatus(status);
+
         Piece piece = board.getPiece(now);//駒を取得
         Piece playerpiece=null;
         if(piece.getOwner()){//humanの場合
@@ -41,6 +45,11 @@ public class Operator {
             }
             //駒を移動
             piece.setPosition(next);
+            if(piece.getOwner()){//人間の場合
+
+            }else{
+                
+            }
             playerpiece.setPosition(next);
             board.setPiece(null, now);
             board.setPiece(piece, next);
@@ -371,4 +380,26 @@ public class Operator {
 
         return aiHavePiecesValue - humanHavePiecesValue;
     } 
+
+    private static void printStatus(Status status){
+        Board board = status.getBoard();
+        Human human = status.getHuman();
+        AI ai = status.getAI();
+
+        System.out.println("Board");
+        for(int i =0; i < 45 ;i++){
+            Piece piece = board.getPiece(i);
+            if(piece == null){continue;}
+            else{System.out.println(piece + ":" + piece.getPosition() + ":" + piece.getOwner());}
+        }
+
+        System.out.println("Human");
+        for(Piece piece:human.getHavePiece()){
+            System.out.println(piece + ":" + piece.getPosition() + ":" + piece.getOwner());
+        }
+        System.out.println("AI");
+        for(Piece piece:ai.getHavePiece()){
+            System.out.println(piece + ":" + piece.getPosition() + ":" + piece.getOwner());
+        }        
+    }
 }
