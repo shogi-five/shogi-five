@@ -24,8 +24,9 @@ public class Operator {
         Human human = status.getHuman();
         AI ai = status.getAI();
 
-        System.out.println("piece:" + board.getPiece(now) + " (" + board.getPiece(now).getOwner() + ")"+  ":now:" + now + ", piece:"  + board.getPiece(next)+  ":next:" + next);
-        printStatus(status);
+        //statusの内容を表示
+        //System.out.println("piece:" + board.getPiece(now) + " (" + board.getPiece(now).getOwner() + ")"+  ":now:" + now + ", piece:"  + board.getPiece(next)+  ":next:" + next);
+        //printStatus(status);
 
         Piece piece = board.getPiece(now);//駒を取得
         Piece playerpiece=null;
