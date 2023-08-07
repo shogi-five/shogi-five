@@ -87,8 +87,7 @@ public class GameController {
      * 盤面の表示
      */
     public void setView(){
-        Board board = this.status.getBoard();
-        this.view.printBoard(board);
+        this.view.printBoard(this.status.getBoard());
     }
 
 

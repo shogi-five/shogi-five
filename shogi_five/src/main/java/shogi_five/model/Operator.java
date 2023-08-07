@@ -7,6 +7,8 @@ import shogi_five.model.Status;
 
 import java.util.ArrayList;
 
+import javax.swing.plaf.synth.SynthStyle;
+
 public class Operator {
     /*
      * 駒の移動、所有を遷移させ次の場面を返す
@@ -18,13 +20,19 @@ public class Operator {
      * @return Status 駒を移動させたStatus
      */
     public static Status operator(Status status, int now, int next){
-        Board board = (Board)status.getBoard();
+        Board board = status.getBoard();
         Human human = status.getHuman();
         AI ai = status.getAI();
 
         Piece piece = board.getPiece(now);//駒を取得
+        Piece playerpiece=null;
+        if(piece.getOwner()){//humanの場合
+            for(Piece p:human.getHavePiece()){if(p.getPosition() == now){playerpiece = p;}}
+        }else{
+            for(Piece p:ai.getHavePiece()){if(p.getPosition() == now){playerpiece = p;}}
+        }
 
-        Status next_Status = new Status(board, human, ai);
+        Status next_status = new Status(board, human, ai);
 
         if (board.getPiece(next) == null){ //移動先に駒がない場合
             //成る場合
@@ -33,14 +41,14 @@ public class Operator {
             }
             //駒を移動
             piece.setPosition(next);
+            playerpiece.setPosition(next);
             board.setPiece(null, now);
             board.setPiece(piece, next);
 
         }else{//移動先に駒がある場合
-            //***********************todo*********************** */
             //成る場合
             if ((next < 5 && piece.getOwner() == true) || (next > 19 && piece.getOwner() == false)){
-                piece.setPromote(true);
+                piece.setPromote(true);playerpiece.setPromote(true);;
             }
 
             Piece captured_piece = board.getPiece(next);//移動先の駒を取得
@@ -101,7 +109,7 @@ public class Operator {
                 }
 
                 //自分の駒を相手の位置に移動
-                piece.setPosition(next);
+                piece.setPosition(next);playerpiece.setPosition(next);
                 board.setPiece(null, now);
                 board.setPiece(piece, next);
                 
@@ -149,22 +157,18 @@ public class Operator {
                 }
 
                 //自分の駒を相手の位置に移動
-                piece.setPosition(next);
+                piece.setPosition(next);playerpiece.setPosition(next);
                 board.setPiece(null, now);
                 board.setPiece(piece, next);
             }
-
-            //新たなStateを作成
-            Status next_status = new Status(board, human, ai);
-            return next_Status;
         }
 
         //Statusにセット
-        next_Status.setAI(ai);
-        next_Status.setBoard(board);
-        next_Status.setHuman(human);
+        next_status.setAI(ai);
+        next_status.setBoard(board);
+        next_status.setHuman(human);
 
-        return next_Status;
+        return next_status;
     }
 
     /*
