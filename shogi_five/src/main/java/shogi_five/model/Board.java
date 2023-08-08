@@ -47,6 +47,10 @@ public class Board implements Cloneable{
      * 駒を位置にセット
      */
     public void setPiece(Piece piece, int position){
+        if (piece != null) {
+            piece.setPosition(position);
+        }
+        
         this.board[position] = piece;
     }
 
@@ -54,7 +58,9 @@ public class Board implements Cloneable{
      * 位置にセットされている駒をゲット
      */
     public Piece getPiece(int position){
+        
         return this.board[position];
+
     }
 
     /*

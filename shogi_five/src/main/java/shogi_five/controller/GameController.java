@@ -44,15 +44,7 @@ public class GameController {
             this.setView();//更新を反映
 
             this.isHumanturn = true;
-            // DEBUG
-            Board board = this.status.getBoard();
-            for (int i = 0; i < 25; i++) {
-                Piece p = board.getPiece(i);
-                if (p == null) {
-                    continue;
-                }
-                
-            }
+
         }
         this.isHumanturn = false;
         System.out.println("決着がつきました");

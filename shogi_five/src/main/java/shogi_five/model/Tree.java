@@ -12,6 +12,9 @@ import java.util.ArrayList;
 
 import javax.management.RuntimeErrorException;
 
+
+import shogi_five.view.PieceKind;
+
 public class Tree{
     /*
      * フィールド
@@ -46,15 +49,26 @@ public class Tree{
         int minEval = Integer.MAX_VALUE;//評価値の最小
         Node minNode = new Node();//評価値が最小のノード
         //Pieceのリストを取得
+        node.getStatus().getAI().getHavePiece();
+        //ArrayList<Piece> haveAIPiece = node.getStatus().getHuman().getHavePiece();
         ArrayList<Piece> haveAIPiece = new ArrayList<>();
+        
         for(int k = 0;k<45;k++){
             if(node.getStatus().getBoard().getPiece(k) != null){
                 if(node.getStatus().getBoard().getPiece(k).getOwner() == true){
+
                     haveAIPiece.add(node.getStatus().getBoard().getPiece(k));
                 }
             }
         }
+        
         int lenHavePiece = haveAIPiece.size();
+        
+        //System.out.println("=========================");
+        //for (Piece piece: haveAIPiece) {
+        //    System.out.println(PieceKind.from(piece));
+        //}
+        
         /*  //log
         for(int cnt = 0;cnt < lenHavePiece;cnt++){
             System.out.println(haveAIPiece.get(cnt).getPosition());
@@ -62,7 +76,7 @@ public class Tree{
         */
         
 
-        for1: for(int i = 0; i < lenHavePiece ; i++){
+        for(int i = 0; i < lenHavePiece ; i++){
             //動く場所のリストを取得
             ArrayList<Integer> availableMoveList = new ArrayList<>();
             try{
@@ -76,16 +90,12 @@ public class Tree{
 
             //それぞれの評価値を計算し、最も高い評価値を取得する
             
-            for2: for(int j = 0; j < availableMoveList.size() ; j++){
+            for(int j = 0; j < availableMoveList.size() ; j++){
                 //駒を動かした新しいノードを用意する
                 Node nextNode = node.clone();
                 Operator.operator(nextNode.getStatus(),haveAIPiece.get(i).getPosition(),availableMoveList.get(j));
                 
-                ArrayList<Piece> pieces = nextNode.getStatus().getAI().getHavePiece();
-                if (i >= pieces.size()) {
-                    break for1;
-                }
-                pieces.get(i).setPosition(availableMoveList.get(j));
+                
                 
                 //盤面を評価する
                 int eval = evalHuman(nextNode,depth - 1).getEvaluation();
@@ -115,16 +125,20 @@ public class Tree{
         Node maxNode = new Node();//評価値が最大のノード
 
         //Pieceのリストを取得
-        ArrayList<Piece> haveHumanPiece = new ArrayList<>();
+        ArrayList<Piece> haveHumanPiece = new ArrayList<>();//node.getStatus().getAI().getHavePiece();
+        
         for(int k = 0;k<45;k++){
             if(node.getStatus().getBoard().getPiece(k) != null){
                 if(node.getStatus().getBoard().getPiece(k).getOwner() == false){
+
                     haveHumanPiece.add(node.getStatus().getBoard().getPiece(k));
                 }
             }
         }
 
         int lenHavePiece = haveHumanPiece.size();
+
+
 
         /*log 
         for(int cnt1 = 0;cnt1 < 45;cnt1++){
@@ -138,6 +152,7 @@ public class Tree{
         */
 
         for(int i = 0; i < lenHavePiece ; i++){
+            //System.out.println(haveHumanPiece.get(i).getPosition());
             //動く場所のリストを取得
            ArrayList<Integer> availableMoveList = new ArrayList<>();
             try{
@@ -155,7 +170,7 @@ public class Tree{
                 //駒を動かした新しいノードを用意する
                 Node nextNode = node.clone();
                 Operator.operator(nextNode.getStatus(),haveHumanPiece.get(i).getPosition(),availableMoveList.get(j));
-
+                //System.out.println("@Tree.java:" + haveHumanPiece.get(i).getPosition() + "to" + availableMoveList.get(j));
                 //盤面を評価する
                 int eval = evalAI(nextNode,depth - 1).getEvaluation();
                 //評価値の最大値より大きければ代入
