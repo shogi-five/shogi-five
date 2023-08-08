@@ -35,7 +35,7 @@ public class GameController {
 
         
 
-        while (!this.checkVictory(false) || ! this.checkVictory(true)) {
+        while (!this.checkVictory(false) && ! this.checkVictory(true)) {
             if (this.isHumanturn) {
                 continue;
             }
@@ -54,6 +54,7 @@ public class GameController {
                 
             }
         }
+        this.isHumanturn = false;
         System.out.println("決着がつきました");
         
 
@@ -136,7 +137,7 @@ public class GameController {
         if (owner){
             pieces = this.status.getHuman().getHavePiece();//Humanの駒のリストを取得
         }else{
-            pieces = this.status.getHuman().getHavePiece();//AIの駒のリストを取得
+            pieces = this.status.getAI().getHavePiece();//AIの駒のリストを取得
         }
 
         int OuCounter = 0;//王の個数を数える
@@ -146,7 +147,7 @@ public class GameController {
                 OuCounter++;
             }
         }
-
+        
         if (OuCounter >= 2){
             checkVictory = true;
         }
