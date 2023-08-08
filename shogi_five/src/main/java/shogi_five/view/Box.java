@@ -78,12 +78,14 @@ public class Box extends JPanel implements MouseListener {
     public void mouseEntered(MouseEvent e) {
         this.isMouseEntered = true;
         this.view.getCursor().entered(this);
+        this.view.repaint();
     }
 
     //　カーソルがこの `box` 上から出たとき
     public void mouseExited(MouseEvent e) {
         this.isMouseEntered = false;
         this.view.getCursor().exited(this);
+        this.view.repaint();
         
     }
 

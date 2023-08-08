@@ -47,6 +47,10 @@ public class View {
         this.frame.repaint();
     }
 
+    public void repaint() {
+        this.printBoard(this.board);
+    }
+
 
 
     public Cursor getCursor() {
