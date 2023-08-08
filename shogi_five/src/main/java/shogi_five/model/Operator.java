@@ -230,7 +230,7 @@ public class Operator {
      * Statusの評価値を返す
      */
     public static int calEval(Status status){
-        return h1(status);
+        return h5(status);
     }
 
     /*
@@ -344,7 +344,7 @@ public class Operator {
             }else if(pieceClass%10 == 8){//龍馬
                 aiHavePiecesValue += 30;
             }
-            System.out.println("piece name:" + pieceClass + ", value:"+aiHavePiecesValue);
+            //System.out.println("piece name:" + pieceClass + ", value:"+aiHavePiecesValue);
         }
 
         ArrayList<Piece> humanHavePieces = status.getHuman().getHavePiece();//人間の所有している駒のリスト
@@ -371,7 +371,7 @@ public class Operator {
             }            
         }
 
-        System.out.println("ai:"+aiHavePiecesValue + ",human:" + humanHavePiecesValue);
+        //System.out.println("ai:"+aiHavePiecesValue + ",human:" + humanHavePiecesValue);
 
         return aiHavePiecesValue - humanHavePiecesValue;
     } 

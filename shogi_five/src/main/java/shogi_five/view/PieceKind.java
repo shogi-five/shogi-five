@@ -12,7 +12,7 @@ import shogi_five.model.piece.Hu;
 import shogi_five.model.piece.Kaku;
 import shogi_five.model.piece.Kin;
 
-enum PieceKind {
+public enum PieceKind {
     EMPTY       (null),
     OU          ("assets\\img\\piece_ou.png"),          // 王
     GYOKU       ("assets\\img\\piece_gyoku.png"),       // 玉
