@@ -42,10 +42,13 @@ public class Tree{
             return node;
         }
 
-        Board board = node.getStatus().getBoard();
+        Status status = node.getStatus();
+        Board board = status.getBoard();
         int minEval = Integer.MAX_VALUE;//評価値の最小
         Node minNode = new Node();//評価値が最小のノード
         //Pieceのリストを取得
+        ArrayList<Piece> haveAIPiece = status.getAI().getHavePiece(); 
+        /* 
         ArrayList<Piece> haveAIPiece = new ArrayList<>();
         for(int k = 0;k<45;k++){
             if(node.getStatus().getBoard().getPiece(k) != null){
@@ -54,6 +57,8 @@ public class Tree{
                 }
             }
         }
+        */
+
         int lenHavePiece = haveAIPiece.size();
         /*  //log
         for(int cnt = 0;cnt < lenHavePiece;cnt++){
@@ -115,6 +120,8 @@ public class Tree{
         Node maxNode = new Node();//評価値が最大のノード
 
         //Pieceのリストを取得
+        ArrayList<Piece> haveHumanPiece = status.getHuman().getHavePiece();
+        /* 
         ArrayList<Piece> haveHumanPiece = new ArrayList<>();
         for(int k = 0;k<45;k++){
             if(node.getStatus().getBoard().getPiece(k) != null){
@@ -123,6 +130,7 @@ public class Tree{
                 }
             }
         }
+        */
 
         int lenHavePiece = haveHumanPiece.size();
 
